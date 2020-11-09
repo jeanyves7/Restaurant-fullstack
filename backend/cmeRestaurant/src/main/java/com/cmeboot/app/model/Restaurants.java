@@ -107,7 +107,4 @@ public class Restaurants {
         this.img = img;
     }
 
-
-
-  
 }

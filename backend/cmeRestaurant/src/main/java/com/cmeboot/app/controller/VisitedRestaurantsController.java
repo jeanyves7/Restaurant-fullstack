@@ -1,7 +1,6 @@
 package com.cmeboot.app.controller;
 
 
-import com.cmeboot.app.model.Restaurants;
 import com.cmeboot.app.model.VisitedRestaurants;
 import com.cmeboot.app.service.IVisitedRestoService;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +20,7 @@ public class VisitedRestaurantsController {
 
     @RequestMapping(method = GET)
     public List<VisitedRestaurants> findAllVisited(){
-        List<VisitedRestaurants> restaus=visoSer.findAll();
-        return restaus;
+        return visoSer.findAll();
     }
 
     @RequestMapping(method = POST)
@@ -32,12 +30,11 @@ public class VisitedRestaurantsController {
 
     @RequestMapping(value = "/Sort/{Type}",method = GET)
     public List<VisitedRestaurants> findOrder(@PathVariable("Type") String type){
-        if(type.equalsIgnoreCase("name")){
-            return visoSer.orderRestosName();
+        if(type.contains("name")){
+            return visoSer.orderRestosName(type);
         }
         else {
             return visoSer.orderRestosDate(type);
         }
     }
-
 }

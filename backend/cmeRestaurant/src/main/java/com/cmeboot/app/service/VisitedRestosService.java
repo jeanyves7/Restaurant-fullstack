@@ -15,8 +15,7 @@ public class VisitedRestosService implements IVisitedRestoService {
 
     @Override
     public List<VisitedRestaurants> findAll() {
-        var visoResto= (List<VisitedRestaurants>) visitedRepo.findAll();
-        return visoResto;
+        return visitedRepo.findAll();
     }
 
     @Override
@@ -25,12 +24,17 @@ public class VisitedRestosService implements IVisitedRestoService {
     }
 
     @Override
-    public List<VisitedRestaurants> orderRestosName() {
-        return visitedRepo.OrderByNameAsc();
+    public List<VisitedRestaurants> orderRestosName(String type) {
+        if(type.equalsIgnoreCase("nameasc")){
+            return visitedRepo.OrderByNameAsc();
+        }
+        else{
+            return visitedRepo.OrderByNameDesc();
+        }
     }
     @Override
     public List<VisitedRestaurants> orderRestosDate(String Type) {
-       if(Type.equalsIgnoreCase("asc")){
+       if(Type.equalsIgnoreCase("dateasc")){
            return visitedRepo.OrderByVisiteddateAsc();
        }
        else{

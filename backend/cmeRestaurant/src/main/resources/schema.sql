@@ -10,9 +10,8 @@ Create Table restaurants(
     image varchar(50), PRIMARY KEY (id)
 );
 
-Drop TABLE IF EXISTS visitedrestaurants;
 
-Create TABLE  visitedrestaurants(
+Create TABLE IF NOT EXISTS visitedrestaurants(
     id SERIAL,
     name VARCHAR(50),
     visiteddate date,

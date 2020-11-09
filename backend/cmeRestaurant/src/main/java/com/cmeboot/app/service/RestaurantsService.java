@@ -2,9 +2,11 @@ package com.cmeboot.app.service;
 
 import com.cmeboot.app.model.Restaurants;
 import com.cmeboot.app.repository.RestaurantsRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+
 
 @Service
 public class RestaurantsService implements IRestaurantsService {
@@ -17,16 +19,13 @@ public class RestaurantsService implements IRestaurantsService {
 
 
     @Override
-    public List<Restaurants> findAll() {
-
-        var cities = (List<Restaurants>) repository.findAll();
-
-        return cities;
+    public Page<Restaurants> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     @Override
-    public List<Restaurants> findType(String type) {
-        return repository.findBytypeContaining(type);
+    public Page<Restaurants> findType(String type, Pageable pageable) {
+        return repository.findBytypeContaining(type,pageable);
     }
 
 
