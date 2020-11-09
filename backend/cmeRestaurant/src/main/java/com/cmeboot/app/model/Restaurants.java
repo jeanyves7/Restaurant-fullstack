@@ -109,23 +109,5 @@ public class Restaurants {
 
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Restaurants that = (Restaurants) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(type, that.type) &&
-                Objects.equals(cost, that.cost) &&
-                Objects.equals(address, that.address) &&
-                Objects.equals(phoneNumber, that.phoneNumber) &&
-                Objects.equals(img, that.img);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, type, cost, address, phoneNumber, img);
-    }
-
+  
 }
