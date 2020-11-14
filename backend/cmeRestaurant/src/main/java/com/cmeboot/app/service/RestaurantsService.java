@@ -1,21 +1,22 @@
 package com.cmeboot.app.service;
 
 import com.cmeboot.app.model.Restaurants;
-import com.cmeboot.app.repository.RestaurantsRepository;
+import com.cmeboot.app.repository.AllRestaurantsRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-
+import java.util.Optional;
 
 @Service
 public class RestaurantsService implements IRestaurantsService {
 
-    private final RestaurantsRepository repository;
+    private final AllRestaurantsRepository repository;
 
-    public RestaurantsService(RestaurantsRepository repository){
+    public RestaurantsService(AllRestaurantsRepository repository){
         this.repository=repository;
     }
+
 
 
     @Override
@@ -26,6 +27,11 @@ public class RestaurantsService implements IRestaurantsService {
     @Override
     public Page<Restaurants> findType(String type, Pageable pageable) {
         return repository.findBytypeContaining(type,pageable);
+    }
+
+    @Override
+    public Optional<Restaurants> findId(Long id) {
+        return repository.findById(id);
     }
 
 

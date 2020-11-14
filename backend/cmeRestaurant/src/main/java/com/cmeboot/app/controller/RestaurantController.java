@@ -1,7 +1,7 @@
 package com.cmeboot.app.controller;
 
 
-import com.cmeboot.app.service.RestaurantsService;
+import com.cmeboot.app.service.IRestaurantsService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import com.cmeboot.app.model.Restaurants;
@@ -10,6 +10,8 @@ import org.springframework.data.domain.Page;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -17,9 +19,9 @@ import org.springframework.web.bind.annotation.*;
 public class RestaurantController {
 
    final
-   RestaurantsService restauService;
+   IRestaurantsService restauService;
 
-    public RestaurantController(RestaurantsService restauService) {
+    public RestaurantController(IRestaurantsService restauService) {
         this.restauService = restauService;
     }
 
@@ -27,6 +29,7 @@ public class RestaurantController {
    public ResponseEntity<Page<Restaurants>> findRestos(Pageable pageable){
        return findAllRestaurants("All",pageable);
    }
+
 
     @GetMapping("/{type}")
     public ResponseEntity<Page<Restaurants>> findAllRestaurants(@PathVariable("type") String type,Pageable pageable){
@@ -40,6 +43,10 @@ public class RestaurantController {
         }catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+    @GetMapping("/id/{id}")
+    public ResponseEntity<Optional<Restaurants>> findId(@PathVariable Long id){
+        return new ResponseEntity<>(restauService.findId(id),HttpStatus.OK);
     }
 
 }

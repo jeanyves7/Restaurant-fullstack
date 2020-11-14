@@ -6,8 +6,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 
 @Repository
-public interface RestaurantsRepository extends PagingAndSortingRepository<Restaurants,Long> {
+public interface AllRestaurantsRepository extends PagingAndSortingRepository<Restaurants,Long> {
     Page<Restaurants> findBytypeContaining(String type, Pageable pageable);
+    Optional<Restaurants> findById(Long id);
 }
