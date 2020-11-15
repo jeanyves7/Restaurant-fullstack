@@ -4,15 +4,16 @@ import {
   AppBar,
   Toolbar,
   IconButton,
-  List,
-  ListItem,
-  ListItemText,
-  Container
+  Button,
+  Typography,
+  Container,
+  Box,
+  MenuItem,
+  Menu
 } from "@material-ui/core";
-import {Restaurant} from "@material-ui/icons"
+import {Restaurant,Home} from "@material-ui/icons"
 import MenuIcon from "@material-ui/icons/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
+
 import { Link } from "react-router-dom";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
@@ -30,8 +31,9 @@ const useStyles = makeStyles((theme) => ({
   },
   navbarDisplayFlex: {
     display: `flex`,
+    flexDirection:`row`,
     flex:1,
-    justifyContent: "flex-start"
+    justifyContent: "sapce-between"
   },
   navDisplayFlex: {
     display: `flex`,
@@ -47,11 +49,9 @@ linkText: {
 
 
 const navLinks = [
-  { title: `about us`, path: `/AboutUs` },
   { title: `Home`, path: `/` },
   { title: `Visited`, path: `/VisitedRestaurants` },
-  { title: `contact`, path: `/Contact` },
-  { title: `faq`, path: `/Faq` }
+ 
 ];
 
 
@@ -108,23 +108,25 @@ const  Header= props => {
              </Menu>
              </>) 
 
-     : <Container  className={classes.navbarDisplayFlex}>
-          <IconButton edge="start" color="inherit" aria-label="home">
+     :<Container style={{ width: '100%' }}>
+      <Box   className={classes.navbarDisplayFlex}>
+        <Box >
+          <IconButton edge="start" color="inherit" aria-label="Restaurants" style={{alignSelf:"flex-staart"}} >
             <Restaurant fontSize="large" color="primary" />
           </IconButton>
-          <List
-            component="nav"
-            aria-labelledby="main navigation"
-            className={classes.navDisplayFlex}
-          >
+          </Box>
+                
               {navLinks.map(({ title, path }) => (
+                <Box p={1}>
            <Link to={path} key={title} className={classes.linkText}>
-                <ListItem button>
-                  <ListItemText primary={title} />
-                </ListItem>
+                <Button button>
+                  <Typography color="primary" > {title} </Typography>
+                </Button>
               </Link>
+              </Box>
                ))}
-          </List>
+            
+          </Box>
         </Container>
               }
           

@@ -3,7 +3,7 @@ import Pagina from '../pagination';
 import {AppBar, Toolbar,Grid} from "@material-ui/core"
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-
+import Resto from "../restoComponent";
 const useStyles=makeStyles({
     RestoContainer:{
         paddingTop:"20px",
@@ -42,17 +42,17 @@ const HomePage = () =>{
             <Toolbar />
         </AppBar>
         <Grid container spacing={space} style={{paddingLeft:`${pad}`}} className={classes.RestoContainer}>
-            <Grid item xs={12} sm={12} md={6}  >
-            this is Resturant  1 
+            <Grid item xs={12}  md={6}  >
+           <Resto />
             </Grid>
-            <Grid item xs={12} sm={12} md={6} >
-            this is Resturant  2
+            <Grid item xs={12}  md={6} >
+            <Resto />
             </Grid>
-            <Grid item xs={12} sm={12} md={6}  >
-            this is Resturant  3
+            <Grid item xs={12}  md={6}  >
+            <Resto />
             </Grid>
-            <Grid item xs={12} sm={12} md={6}  >
-            this is Resturant  4
+            <Grid item xs={12}  md={6}  >
+            <Resto />
             </Grid>
         
         </Grid>
