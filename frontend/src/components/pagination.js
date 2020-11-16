@@ -11,16 +11,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PaginationControlled({pages}) {
+export default function PaginationControlled({pages,SP}) {
   const classes = useStyles();
-  const [page, setPage] = React.useState(1);
+  
   const handleChange = (event, value) => {
-    setPage(value);
-    
+    SP(value);    
   };
   return (
     <div className={classes.root}>
-      <Pagination count={pages} page={page} onChange={handleChange} color="secondary" showFirstButton showLastButton  />
+      <Pagination count={pages}  onChange={handleChange} color="secondary" showFirstButton showLastButton  />
     </div>
   );
 }

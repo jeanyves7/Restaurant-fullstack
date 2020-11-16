@@ -51,6 +51,7 @@ linkText: {
 const navLinks = [
   { title: `Home`, path: `/` },
   { title: `Visited`, path: `/VisitedRestaurants` },
+  {title: `faq`, path: `/Faq`},
  
 ];
 
@@ -108,7 +109,7 @@ const  Header= props => {
              </Menu>
              </>) 
 
-     :<Container style={{ width: '100%' }}>
+     :
       <Box   className={classes.navbarDisplayFlex}>
         <Box >
           <IconButton edge="start" color="inherit" aria-label="Restaurants" style={{alignSelf:"flex-staart"}} >
@@ -127,7 +128,7 @@ const  Header= props => {
                ))}
             
           </Box>
-        </Container>
+      
               }
           
         </Toolbar>
