@@ -6,14 +6,12 @@ import {
   IconButton,
   Button,
   Typography,
-  Container,
   Box,
   MenuItem,
   Menu
 } from "@material-ui/core";
 import {Restaurant,Home} from "@material-ui/icons"
 import MenuIcon from "@material-ui/icons/Menu";
-
 import { Link } from "react-router-dom";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
@@ -50,9 +48,7 @@ linkText: {
 
 const navLinks = [
   { title: `Home`, path: `/` },
-  { title: `Visited`, path: `/VisitedRestaurants` },
-  {title: `faq`, path: `/Faq`},
- 
+  { title: `Visited`, path: `/VisitedRestaurants` }
 ];
 
 
@@ -119,7 +115,7 @@ const  Header= props => {
                 
               {navLinks.map(({ title, path }) => (
                 <Box p={1}>
-           <Link to={path} key={title} className={classes.linkText}>
+           <Link to={path} key={title} className={classes.linkText}  >
                 <Button button>
                   <Typography color="primary" > {title} </Typography>
                 </Button>

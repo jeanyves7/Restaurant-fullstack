@@ -1,6 +1,6 @@
   
-import {takeLatest, call} from 'redux-saga/effects'
-import {ADD_VRESTO} from '../actions/actions'
+import {takeLatest, call, put} from 'redux-saga/effects'
+import {ADD_VRESTO,saveResto} from '../actions/actions'
 import { postVRestos } from '../api/apiCalls'
 
 export function* saveRestoWatcher(){
@@ -8,7 +8,8 @@ export function* saveRestoWatcher(){
 }
 
 function* saveRestoFlow(action) {
-  console.log(action.payload)
+  console.log(action.payload);
   const dat=action.payload;
-  yield call(postVRestos, dat)
+  yield call(postVRestos, dat);
+ 
 }

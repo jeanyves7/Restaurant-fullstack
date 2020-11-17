@@ -1,11 +1,15 @@
-import {ADD_VRESTO, SET_VRESTO} from "../actions/actions";
+import {SAVE_VRESTO, SET_VRESTO} from "../actions/actions";
 
 const initialState ={
-    Visited:[]
+    Visited:[],
+    
 }
 
 const VisitedReducer = (state=initialState,action) =>{
     switch(action.type){
+        case SAVE_VRESTO:
+            return {...state,Visited:[...state.Visited,action.payload]}
+
         case SET_VRESTO:
             return {...state,Visited:action.payload};
         default:

@@ -5,12 +5,10 @@ import {
     IconButton,
     Grid,
     Typography,
-    Slide,
-   
 } from "@material-ui/core";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import {Home} from "@material-ui/icons";
-import {Link} from "react-router-dom";
+
 
 
 
@@ -37,27 +35,23 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-
-
-const Faq = ({name,type,cost,addrss,num,image,close}) =>{
+const Info = ({name,type,cost,addrss,num,image,close}) =>{
    console.log("we are here");
    
-   
-const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+    const attributes=[name,type,"cost for two: "+cost,addrss,num]
+    const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
 
 
     const theme=useTheme();
     const isMobile=useMediaQuery(theme.breakpoints.down("sm"));
     
     const gap = () => {
+        //constant to represent the gap between the attributes
+        const spaceGap=[1,1,1];
         return (
         <Paper elevation={0}>
-        <Typography variant={"h4"} style={{background:"gray",paddingTop:"20px"}}/> 
-        <Typography variant={"h4"} style={{background:"gray",paddingTop:"20px"}}/>  
-        <Typography variant={"h4"} style={{background:"gray",paddingTop:"20px"}}/>  
-        
-        
+        {spaceGap.map(i=>(<Typography variant={"h4"} style={{background:"gray",paddingTop:"20px"}}/> ))}
         </Paper>
         );
     }
@@ -66,6 +60,7 @@ const classes = useStyles();
     const fill = (text) =>{
         return (
         <>
+        {gap()}
         <Paper  elevation={3} >
         <Typography variant={"h4"} style={{background:"white",borderRadius:"10%"}} color="primary"> {text} </Typography>
         </Paper>
@@ -73,32 +68,27 @@ const classes = useStyles();
         );
     }
 
+    
+
     return (
-        <>
+    <>
         <div className={classes.root}>
         <Grid container spacing={4} flexwrap="no-wrap"  className={classes.RestoContainer}>
-        <Grid item xs={6} >
-        <img className={classes.images} src={image}  alt=""/> 
-        </Grid>
-        <Grid item xs={12} md={6}>
-        {gap()}
-        {fill(name)}
-        {gap()}
-        {fill(type)}
-        {gap()}
-        {fill(addrss)}
-        {gap()}
-        {fill(cost)}
-        {gap()}
-        {fill(num)}
-        {gap()}
+            <Grid item xs={6} >
+                <img className={classes.images} src={image}  alt=""/> 
+            </Grid>
+            <Grid item xs={12} md={6}>
 
-        <IconButton  color="primary" style={{background:"white"}} onClick={close} >
-            <Home/>
-            <Typography variant={"h4"}  color="primary"> {"Home"} </Typography>
-        </IconButton>
-         {gap()}
-        </Grid>
+                {attributes.map(atr=>(
+                    fill(atr)
+                ))}
+            {gap()}
+            <IconButton  color="primary" style={{background:"white"}} onClick={close} >
+                <Home/>
+                <Typography variant={"h4"}  color="primary"> Home </Typography>
+                </IconButton>
+            {gap()}
+            </Grid>
         
         </Grid>
         </div>
@@ -106,4 +96,4 @@ const classes = useStyles();
     );
 }
 
-export default Faq;
+export default Info;

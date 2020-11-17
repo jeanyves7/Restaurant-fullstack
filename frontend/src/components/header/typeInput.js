@@ -1,25 +1,29 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import Button from '@material-ui/core/Button';
+import {useDispatch,useSelector} from "react-redux";
+import {setType} from "../../actions/actions"
 
 const useStyles = makeStyles((theme) => ({
  
   formControl: {
     minWidth: 100,
-    marginTop:"10px",
+    
     background:"white"
   },
 }));
 
 
-export default function TypeInput({SType}) {
+export default function TypeInput() {
   const classes = useStyles();
-  const [age, setAge] = React.useState('');
-  const [open, setOpen] = React.useState(false);
+  const type= useSelector(state => state.Type.types);
+  const [open, setOpen] =useState(false);
+
+
+  const dispatch = useDispatch();
 
 
   const Types=[
@@ -44,9 +48,9 @@ export default function TypeInput({SType}) {
 
 
   const handleChange = (event) => {
-    setAge(event.target.value);
-    SType(event.target.value);
-
+    const data=event.target.value
+    console.log(data);
+    dispatch(setType(data));
   };
 
   const handleClose = () => {
@@ -60,15 +64,15 @@ export default function TypeInput({SType}) {
   return (
     <div>
       <FormControl className={classes.formControl}>
-        <InputLabel id="demo-controlled-open-select-label" >Type</InputLabel>
+        <InputLabel id="demo-controlled-open-select-label" >type</InputLabel>
         <Select
           labelId="demo-controlled-open-select-label"
           id="demo-controlled-open-select"
           open={open}
           onClose={handleClose}
           onOpen={handleOpen}
-          value={age}
-          onChange={handleChange}
+          value={type}
+         onChange={handleChange}
         >
           {
               Types.map(type => (

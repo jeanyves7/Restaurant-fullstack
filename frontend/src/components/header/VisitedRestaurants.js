@@ -1,52 +1,35 @@
-import * as React from 'react';
+import  React, {useEffect}  from 'react';
 import { DataGrid } from '@material-ui/data-grid';
-
+import {loadVResto} from "../../actions/actions";
+import {useDispatch,useSelector} from "react-redux";
+import  moment from "moment";
 
 const columns = [
   { field: 'name',width: 180  },
   { field: 'VisitedDate', type: 'date', width: 180 }
 ];
 
-const rows = [
-  {
-    id: 1,
-    name: 'Chaud Froid',
-    VisitedDate:"2012-03-12",
-  },
-  {
-    id: 2,
-    name: 'Deek Duke',
-    VisitedDate:"2012-04-14",
-  },
-  {
-    id: 3,
-    name: 'Pizza Nini',
-    VisitedDate:"2001-01-01",
-  },
-  {
-    id: 4,
-    name: 'La Burgeria',
-    VisitedDate:"2019-05-19",
-  },
-  {
-    id: 5,
-    name: 'Malek el tawouk',
-    VisitedDate:"2009-06-07",
-  },
-  {
-    id: 6,
-    name: 'Chaud Froid',
-    VisitedDate:"2005-12-4",
-  },
-];
-
-
-
 export default function VisitedRestaurants() {
+
+  const VRestos = useSelector(state => state.Visited.Visited);
+  const dispatch = useDispatch();
+  
+  useEffect(()=>{
+    dispatch(loadVResto());
+  },[])
+
+  const UVRestos=VRestos.map(resto =>({
+    id:resto.id,
+    name:resto.name,
+    VisitedDate:(moment(resto.visiteddate,'YYYY-MMDD').format('MMMM Do YYYY'))
+  } ))
+
+ 
   return (
     <div style={{ height: 400, width: '100%' }}>
-      <DataGrid  rows={rows} columns={columns} />
+      <DataGrid  rows={UVRestos} columns={columns} />
     </div>
   );
+  
 }
 

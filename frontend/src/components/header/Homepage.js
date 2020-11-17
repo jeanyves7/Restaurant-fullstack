@@ -8,7 +8,7 @@ import SearchAppBar from "./searchbar";
 import {Link} from "react-router-dom";
 import RestoInfo from "./RestoInfo";
 import {loadResto} from "../../actions/actions";
-
+import Loader from "../loader/loaders";
 
 
 const useStyles=makeStyles({
@@ -22,11 +22,17 @@ const useStyles=makeStyles({
       display:"flex",
       justifyContent:"space-evenly",
       alignItems:"center",
-      
+      flexFlow:"row wrap"    
+    },
+    loader:{
+      paddingTop:"20px",
+      paddingLeft:"100px",
+      paddingRight:"100px",
+      display:"flex",
+      flexDirection:"column",
+      justifyContent:"center",
+      alignItems:"center",
       flexFlow:"row wrap"
-      
-      
-        
     },
     pol:{
       paddingTop:"10px",
@@ -49,12 +55,14 @@ const HomePage = () =>{
     const theme=useTheme();
     
     // this selector fetch for us the stored restaurants
-    const Restos = useSelector(state => state.Restaurants.Restos)
+    const Restos = useSelector(state => state.Restaurants.Restos);
+    const Loading=useSelector(state=>state.Restaurants.loading);
+    const type= useSelector(state => state.Type.types);
     
     const dispatch = useDispatch();
 
     const [page,setPage]=useState(1);
-    const [type,setType]=useState("All");
+    
 
     //this state to handle the opening dialog
     const [open, setOpen] = useState(0);
@@ -86,10 +94,16 @@ const HomePage = () =>{
       }
       dispatch(loadResto(data))
   }
+  if(Loading){
+    return( 
+
+    <Loader />
+    );
+  }else { 
 
     return (
         <>
-        <SearchAppBar sType={setType} />
+        <SearchAppBar />
         <Box container spacing={5} className={classes.RestoContainer} >
           {Restos.map(resto =>(
                <Box item  p={1} m={1} key={resto.id}>
@@ -111,6 +125,7 @@ const HomePage = () =>{
         
         </>
     );
+          }
 }
 
 export default HomePage;

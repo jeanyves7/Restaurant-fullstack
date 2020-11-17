@@ -1,8 +1,7 @@
 import React from "react";
-import { Button, makeStyles } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import {useSelector, useDispatch} from "react-redux";
-import {loadResto,addVResto} from "./actions/actions";
+
 
 
 import Homepage from './components/header/Homepage';
@@ -22,13 +21,9 @@ const styles = makeStyles((theme) => ({
 }));
 
 const App = () => {
-
+  
   const classes=styles();
-  const Restos = useSelector(state => state.Restaurants.Restos)
-  const dispatch = useDispatch();
-
-
-
+ 
   return (
     <div className={classes.root}> 
     <Router>

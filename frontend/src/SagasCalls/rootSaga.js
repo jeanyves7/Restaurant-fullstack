@@ -1,10 +1,12 @@
-import {fork} from 'redux-saga/effects'
+import {takeLatest, call, put,all,fork} from 'redux-saga/effects'
 import {LoadRestosWatcher} from "./loadRestosSaga";
 import {LoadVRestosWatcher} from "./loadVRestoSaga";
 import {saveRestoWatcher} from "./saveVRestos";
 
 export function* rootSaga(){
-    yield fork(LoadRestosWatcher);
-    yield fork(LoadVRestosWatcher);
-    yield fork(saveRestoWatcher);
+    yield all([
+       fork(LoadRestosWatcher),
+        fork(LoadVRestosWatcher),
+        fork(saveRestoWatcher)
+    ]);
 }

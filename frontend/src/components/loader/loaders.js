@@ -1,24 +1,23 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Pagination from '@material-ui/lab/Pagination';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    width: '100%',
     '& > * + *': {
       marginTop: theme.spacing(2),
     },
   },
 }));
 
-export default function PaginationControlled({pages,SP}) {
+export default function LinearIndeterminate() {
   const classes = useStyles();
-  
-  const handleChange = (event, value) => {
-    SP(value);    
-  };
+
   return (
     <div className={classes.root}>
-      <Pagination count={pages}  onChange={handleChange} color="secondary" showFirstButton showLastButton  />
+      <LinearProgress />
+      <LinearProgress color="secondary" />
     </div>
   );
 }

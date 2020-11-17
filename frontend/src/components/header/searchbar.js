@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react';
+import React,{useState} from 'react';
 import {AppBar,Toolbar,Button,InputBase,Box} from '@material-ui/core';
 import {useDispatch} from "react-redux";
 import Typography from '@material-ui/core/Typography';
@@ -13,7 +13,8 @@ const useStyles = makeStyles((theme) => ({
   headers: {
     display:"flex",
       justifyContent:"space-between",
-      
+      alignContent:"center",
+      alignItems:"center",
       flexDirection:`row`,
       flex:1,
   },
@@ -59,20 +60,30 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchAppBar({sType}) {
+export default function SearchAppBar() {
   const classes = useStyles();
   const [search,setSearch]=useState("");
+  const [done,setDone]=useState(true);
   const dispatch = useDispatch();
+
+  const backHome = ()=> {
+    const data={
+      type:"All",
+      page:1
+    }
+    dispatch(loadResto(data))
+  }
 
   const updateSearch = e =>{
     setSearch(e.target.value)
+
   }
+
 
   const getSearch = e =>{
     e.preventDefault();
     const Name={name:search}
     dispatch(loadResto(Name));
-    setSearch("");
   }
 
   return (
@@ -98,11 +109,18 @@ export default function SearchAppBar({sType}) {
           </div>
           </Box>
           <Box item p={1}m={1}>
+          
+
           <Button style={{background:"white"}} onClick={getSearch} >
             <Typography >SEARCH</Typography>
           </Button>
           </Box>
-              <TypeInput SType={sType} />
+          <Box item p={1}m={1}>
+          <Button style={{background:"white"}} onClick={backHome} >
+            <Typography >Back Home</Typography>
+          </Button>
+          </Box>
+              <TypeInput />
           </Box>
         </Toolbar>
       </AppBar>

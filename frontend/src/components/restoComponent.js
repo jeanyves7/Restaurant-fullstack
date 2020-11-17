@@ -1,10 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React,{useState} from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import {Paper} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import Typography from "@material-ui/core/Typography";
+import {useDispatch,useSelector} from "react-redux";
+import { loadVResto,addVResto } from "../actions/actions";
 
 
 
@@ -41,11 +42,32 @@ const useStyles = makeStyles((muiBaseTheme) => ({
   }
 }));
 
-function App({ name,photo }) {
+function RestauComponent({ name,photo }) {
   const classes = useStyles();
+  
+  const dispatch = useDispatch();
+
+  //handle when the customer click on the visited button
+  const [visited,setVisited]=useState(false)
+
+  if(visited){
+    dispatch(loadVResto());
+    setVisited(false);
+  }
+
   const handle = e =>{
+    //this two events is to prevent to prevent the opening of the dialog 
     e.preventDefault();
     e.stopPropagation();
+    
+    //this var set the date to "YYYY-MM-DD"
+    const  today = new Date().toISOString().slice(0, 10)
+    const data={
+      name:name,
+      visiteddate:today
+    }
+    dispatch(addVResto(data));
+    setVisited(true);
   }
   return (
       <>
@@ -66,4 +88,4 @@ function App({ name,photo }) {
   );
 }
 
-export default (App);
+export default (RestauComponent);

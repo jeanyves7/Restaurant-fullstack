@@ -4,7 +4,7 @@ export const getRestos =  async (restos) => {
     const pag=restos.action.action.page -1
     const realPage=pag.toString();
     const Type=restos.action.action.type;
-    const res = await api.get(`Restaurants/${Type}/?page=${realPage}&size=2`);
+    const res = await api.get(`Restaurants/${Type}/?page=${realPage}&size=4`);
     return res.data.content;
 }
 
@@ -21,11 +21,14 @@ export const getVRestos= async () =>{
     return res.data;
 }
 
-export const postVRestos = async (data) =>{
+export const postVRestos =  async (data) =>{
     console.log(data)
-    return  api.post("/VisitedRestaurants", data).then(res=> res.data).catch(error => {
-        console.log(error)
-    });
+    try {
+        const res = await api.post("/VisitedRestaurants", data);
+        return res.data;
+    } catch (error) {
+        console.log(error);
+    }
    
 }
 
