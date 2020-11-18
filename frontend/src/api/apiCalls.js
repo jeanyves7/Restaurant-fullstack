@@ -4,15 +4,15 @@ export const getRestos =  async (restos) => {
     const pag=restos.action.action.page -1
     const realPage=pag.toString();
     const Type=restos.action.action.type;
-    const res = await api.get(`Restaurants/${Type}/?page=${realPage}&size=4`);
-    return res.data.content;
+    const res = await api.get(`Restaurants/${Type}/?page=${realPage}&size=2`);
+    return res.data;
 }
 
 
 export const getNRestos =  async (restos) => { 
     const Name=restos.action.action.name;
     const res = await api.get(`Restaurants/name/${Name}`);
-    return res.data.content;
+    return res.data;
 }
 
 

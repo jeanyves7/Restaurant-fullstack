@@ -1,13 +1,16 @@
-import {SET_TYPE} from "../actions/actions"
+import {SET_TYPE,SET_PAGE} from "../actions/actions"
 
 const initalState={
-    types:"All"
+    types:"All",
+    page:1
 }
 const TypeReducer =(state=initalState,action)=>{
     switch(action.type){
         case SET_TYPE:
-            console.log(action.payload);
             return {...state,types:action.payload}
+            case SET_PAGE:
+                console.log(action.payload);
+                return {...state,page:action.payload}
         default:
             return state;
     }

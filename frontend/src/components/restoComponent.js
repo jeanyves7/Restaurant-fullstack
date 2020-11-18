@@ -6,6 +6,7 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import Typography from "@material-ui/core/Typography";
 import {useDispatch,useSelector} from "react-redux";
 import { loadVResto,addVResto } from "../actions/actions";
+import SnackBar from "./snackBar/AlreadyVisitedSnackBar";
 
 
 
@@ -44,7 +45,10 @@ const useStyles = makeStyles((muiBaseTheme) => ({
 
 function RestauComponent({ name,photo }) {
   const classes = useStyles();
-  
+ 
+  const [openErrorSnackBar,setOpenErrorSnackBar]=useState(false);
+  const [openDoneSnackBar,setOpenDoneSnackBar]=useState(false);
+  const VRestos = useSelector(state => state.Visited.Visited);
   const dispatch = useDispatch();
 
   //handle when the customer click on the visited button
@@ -66,11 +70,24 @@ function RestauComponent({ name,photo }) {
       name:name,
       visiteddate:today
     }
-    dispatch(addVResto(data));
-    setVisited(true);
+    let alreadyVisited=false;
+    VRestos.map(resto=>{
+      if(resto.name===name && resto.visiteddate===today){
+        alreadyVisited=true;
+        setOpenErrorSnackBar(true);
+      }
+    })
+    if(!alreadyVisited){
+      dispatch(addVResto(data));
+      setOpenDoneSnackBar(true);
+      setVisited(true);
+    }
+    
   }
   return (
       <>
+    <SnackBar  open ={openErrorSnackBar} setClose={setOpenErrorSnackBar}  type={"error"} />
+    <SnackBar  open ={openDoneSnackBar} setClose={setOpenDoneSnackBar} type={"success"} />
     <Paper className={classes.root}  style={{ backgroundImage: `url(${photo})`}} >
           <Typography
             className={classes.content}

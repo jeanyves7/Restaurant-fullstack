@@ -36,15 +36,11 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Info = ({name,type,cost,addrss,num,image,close}) =>{
-   console.log("we are here");
    
     const attributes=[name,type,"cost for two: "+cost,addrss,num]
     const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
-
 
     const theme=useTheme();
-    const isMobile=useMediaQuery(theme.breakpoints.down("sm"));
     
     const gap = () => {
         //constant to represent the gap between the attributes

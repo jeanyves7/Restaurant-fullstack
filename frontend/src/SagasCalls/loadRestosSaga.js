@@ -1,7 +1,7 @@
 
 
 import {takeLatest, call, put} from 'redux-saga/effects'
-import {LOAD_RESTO,setResto,loadingResto} from "../actions/actions"
+import {setType,LOAD_RESTO,setResto,loadingResto,setRestoError,setTotalPages} from "../actions/actions"
 import {getRestos,getNRestos} from "../api/apiCalls";
 
 
@@ -18,15 +18,16 @@ function* LoadRestoFlow(action){
         Resto= yield call(getRestos,{action});
    }
    else{
-       Resto= yield call(getNRestos,{action})
+       Resto= yield call(getNRestos,{action});
    }
     isloading=false;
+    yield put(setResto(Resto.content));
+    yield put(setTotalPages(Resto.totalPages))
     yield put(loadingResto(isloading));
-    yield put(setResto(Resto))
    }catch (error){
     isloading=false;
     yield put(loadingResto(isloading));
-    //to be treated
+    yield put(setRestoError(true));
     return;
    }
 }

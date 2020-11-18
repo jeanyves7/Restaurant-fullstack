@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
-import {loadResto} from "../../actions/actions";
+import {loadResto,setType} from "../../actions/actions";
 import TypeInput from "./typeInput";
 
 
@@ -71,6 +71,7 @@ export default function SearchAppBar() {
       type:"All",
       page:1
     }
+    dispatch(setType("All"))
     dispatch(loadResto(data))
   }
 

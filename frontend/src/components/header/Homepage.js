@@ -7,9 +7,9 @@ import Resto from "../restoComponent";
 import SearchAppBar from "./searchbar";
 import {Link} from "react-router-dom";
 import RestoInfo from "./RestoInfo";
-import {loadResto} from "../../actions/actions";
+import {loadResto,setPage} from "../../actions/actions";
 import Loader from "../loader/loaders";
-
+import SnackBar from "../snackBar/RestosnackBars";
 
 const useStyles=makeStyles({
     appBar: {
@@ -40,6 +40,9 @@ const useStyles=makeStyles({
       flex:1,
       justifyContent:"center",
     },
+    linkText: {
+        textDecoration: `none`,
+      }
 })
 
 
@@ -49,7 +52,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const HomePage = () =>{
     // for now the pages aren't dynamically changed
-    const pages=20;
+  // const pages=20;
 
     const classes=useStyles();
     const theme=useTheme();
@@ -57,11 +60,13 @@ const HomePage = () =>{
     // this selector fetch for us the stored restaurants
     const Restos = useSelector(state => state.Restaurants.Restos);
     const Loading=useSelector(state=>state.Restaurants.loading);
+    
     const type= useSelector(state => state.Type.types);
+    const page= useSelector(state => state.Type.page);
     
     const dispatch = useDispatch();
 
-    const [page,setPage]=useState(1);
+
     
 
     //this state to handle the opening dialog
@@ -79,7 +84,7 @@ const HomePage = () =>{
   
   // we render the data based on the new type and from the first page
   useEffect(()=>{
-    setPage(1);
+    dispatch(setPage(1));
     getRestos();
    },[type])
 
@@ -95,19 +100,17 @@ const HomePage = () =>{
       dispatch(loadResto(data))
   }
   if(Loading){
-    return( 
-
-    <Loader />
-    );
-  }else { 
+    return <Loader/>
+  }else{
 
     return (
         <>
+        <SnackBar />
         <SearchAppBar />
         <Box container spacing={5} className={classes.RestoContainer} >
           {Restos.map(resto =>(
                <Box item  p={1} m={1} key={resto.id}>
-               <Link onClick={()=>handleClickOpen(resto.id)} to="" >
+               <Link onClick={()=>handleClickOpen(resto.id)} to="" className={classes.linkText} >
                          <Resto name={resto.name} photo={resto.img}  />
                 </Link>
                 <Dialog fullScreen open={open===resto.id} onClose={handleClose} TransitionComponent={Transition}>
@@ -118,14 +121,12 @@ const HomePage = () =>{
         </Box>
         <Box container display="flex" style={{textAlign:"center"}} >
           <Box item  margin="auto">
-        <Pagina pages={pages} SP={setPage}  />
+        <Pagina   />
         </Box>
         </Box>
-       
-        
         </>
     );
           }
-}
 
+        }
 export default HomePage;

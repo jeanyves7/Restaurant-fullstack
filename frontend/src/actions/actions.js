@@ -1,13 +1,42 @@
 export const ADD_VRESTO="ADD_VRESTO";
 export const LOAD_VRESTO="LOAD_VRESTO";
 export const SET_VRESTO="SET_VRESTO";
+export const SAVE_VRESTO="SAVE_VRESTO";
+
 export const SET_RESTO="SET_RESTO";
 export const LOAD_RESTO="LOAD_RESTO";
 export const LOAD_NRESTO="LOAD_NRESTO";
-export const SAVE_VRESTO="SAVE_VRESTO";
+
 export const LOADING_RESTO_DATA="LOADER_RESTO_DATA";
 export const LOADING_VRESTO_DATA="LOADER_VRESTO_DATA";
+
+export const SET_RESTO_ERROR="SET_RESTO_ERROR";
+export const SET_VISITED_ERROR="SET_VISITED_ERROR";
+
+export const SET_TOTAL_PAGES="SET_TOTAL_PAGES";
+export const SET_PAGE="SET_PAGE";
 export const SET_TYPE="SET_TYPE";
+
+
+export const setPage=(data)=>({
+    type:SET_PAGE,
+    payload:data,
+})
+
+export const setTotalPages=(data)=>({
+        type:SET_TOTAL_PAGES,
+        payload:data
+})
+
+export const setVisitedError=(data)=>({
+    type:SET_VISITED_ERROR,
+    payload:data,
+})
+
+export const setRestoError=(data)=>({
+    type:SET_RESTO_ERROR,
+    payload:data,
+})
 
 export const setType =(type)=>({
     type:SET_TYPE,
@@ -56,8 +85,6 @@ export const loadResto = (payload) =>({
 export const loadVResto =() =>({
     type:LOAD_VRESTO
 });
-
-
 
 export const loadNResto=(Resto)=>({
     type:LOAD_NRESTO,

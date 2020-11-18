@@ -1,5 +1,5 @@
 import {takeLatest, call, put} from 'redux-saga/effects'
-import {LOAD_VRESTO,setVResto,loadingVResto} from "../actions/actions"
+import {LOAD_VRESTO,setVResto,loadingVResto,setVisitedError} from "../actions/actions"
 import {getVRestos} from "../api/apiCalls";
 
 export function* LoadVRestosWatcher(){
@@ -12,12 +12,13 @@ function* LoadVRestoFlow(){
     try{
     const Resto= yield call (getVRestos)
     isLoading=false;
-    yield put(loadingVResto(isLoading));
     yield put(setVResto(Resto))
+    yield put(loadingVResto(isLoading));
+   
     }catch(erro){
         isLoading=false;
         yield put(loadingVResto(isLoading));
-        //to be treated 
+        yield put(setVisitedError(true));
         return;
     }
 }
