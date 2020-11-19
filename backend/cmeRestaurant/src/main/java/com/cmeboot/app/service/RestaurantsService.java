@@ -30,9 +30,13 @@ public class RestaurantsService implements IRestaurantsService {
     }
 
     @Override
+    public Page<Restaurants> findName(String name, Pageable pageable) {
+        return repository.findByNameIgnoreCase(name,pageable);
+    }
+
+    @Override
     public Optional<Restaurants> findId(Long id) {
         return repository.findById(id);
     }
-
 
 }

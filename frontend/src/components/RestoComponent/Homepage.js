@@ -1,10 +1,10 @@
 import React , {useEffect,useState} from 'react';
-import Pagina from '../pagination';
-import {  Dialog,Box,Slide} from "@material-ui/core";
+import Pagina from '../Pagination/pagination';
+import {  Dialog,Box,Slide, Typography} from "@material-ui/core";
 import {useDispatch,useSelector} from "react-redux";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Resto from "../restoComponent";
-import SearchAppBar from "./searchbar";
+import { makeStyles} from "@material-ui/core/styles";
+import Resto from "../RestoComponent/restoPrototype";
+import SearchAppBar from "../header/searchbar";
 import {Link} from "react-router-dom";
 import RestoInfo from "./RestoInfo";
 import {loadResto,setPage} from "../../actions/actions";
@@ -20,7 +20,7 @@ const useStyles=makeStyles({
       paddingLeft:"100px",
       paddingRight:"100px",
       display:"flex",
-      justifyContent:"space-evenly",
+      justifyContent:"center",
       alignItems:"center",
       flexFlow:"row wrap"    
     },
@@ -42,7 +42,15 @@ const useStyles=makeStyles({
     },
     linkText: {
         textDecoration: `none`,
+      },
+      content:{
+        paddingTop:"300px",
+        justifyItems:"center",
+        alignItems:"center",
+        justifyContent:"center",
+        textAlign:"center",
       }
+      
 })
 
 
@@ -51,24 +59,23 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   });
 
 const HomePage = () =>{
-    // for now the pages aren't dynamically changed
-  // const pages=20;
 
     const classes=useStyles();
-    const theme=useTheme();
     
     // this selector fetch for us the stored restaurants
     const Restos = useSelector(state => state.Restaurants.Restos);
+    
+    //This loading state is for the loaders
     const Loading=useSelector(state=>state.Restaurants.loading);
     
+    //States responsable for displaying the current type and page
     const type= useSelector(state => state.Type.types);
     const page= useSelector(state => state.Type.page);
+    const size= useSelector(state => state.Type.size);
     
     const dispatch = useDispatch();
 
-
-    
-
+    //Dialog section:
     //this state to handle the opening dialog
     const [open, setOpen] = useState(0);
     
@@ -77,6 +84,11 @@ const HomePage = () =>{
       setOpen(par)
     };
 
+    const handleClose = () => {
+      setOpen(false);
+    };
+
+    const empty=(Restos.length===0)
   //we render the new data based on the current type  
   useEffect(()=>{
    getRestos();
@@ -88,45 +100,58 @@ const HomePage = () =>{
     getRestos();
    },[type])
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-    
+   useEffect(()=>{
+    dispatch(setPage(1));
+    getRestos();
+   },[size])
+  
+  //function to dispatch the restaurants based on type and current page
   const getRestos =() =>{
       const data={
         type:type,
-        page:page
+        page:page,
+        size:size
       }
       dispatch(loadResto(data))
   }
+
+
+  //this condition is to show if we are fetching the data to show the loaders
   if(Loading){
     return <Loader/>
   }else{
-
     return (
-        <>
+       <>
         <SnackBar />
         <SearchAppBar />
-        <Box container spacing={5} className={classes.RestoContainer} >
+        {!empty ?
+          <> 
+        <Box  spacing={5} className={classes.RestoContainer} >
           {Restos.map(resto =>(
-               <Box item  p={1} m={1} key={resto.id}>
+              //maping through the list of fetched Restos
+               <Box   p={1} m={1} key={resto.id}>
                <Link onClick={()=>handleClickOpen(resto.id)} to="" className={classes.linkText} >
-                         <Resto name={resto.name} photo={resto.img}  />
+                         <Resto  key={resto.id} name={resto.name} photo={resto.img}  />
                 </Link>
-                <Dialog fullScreen open={open===resto.id} onClose={handleClose} TransitionComponent={Transition}>
-                      <RestoInfo  name={resto.name} type={resto.type} cost={resto.costLL} addrss={resto.address} num={resto.phoneNumber} image={resto.img} close={handleClose}  />
+                <Dialog fullScreen open={open===resto.id} onClose={handleClose} TransitionComponent={Transition} key={resto.id} >
+                      <RestoInfo  key={resto.id}  name={resto.name} type={resto.type} cost={resto.costLL} addrss={resto.address} num={resto.phoneNumber} image={resto.img} close={handleClose}  />
                </Dialog>
                </Box>
           ))}
         </Box>
-        <Box container display="flex" style={{textAlign:"center"}} >
-          <Box item  margin="auto">
-        <Pagina   />
+        <Box  display="flex" style={{textAlign:"center"}} >
+          <Box   margin="auto">
+        <Pagina />
         </Box>
         </Box>
         </>
+        :
+  <Box className={classes.content}>
+    <Typography variant="h5" > No content was found :'( </Typography>
+  </Box>
+  }
+   </>
     );
           }
-
-        }
+}
 export default HomePage;

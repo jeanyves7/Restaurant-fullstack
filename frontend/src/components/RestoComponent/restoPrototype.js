@@ -5,8 +5,8 @@ import IconButton from "@material-ui/core/IconButton";
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import Typography from "@material-ui/core/Typography";
 import {useDispatch,useSelector} from "react-redux";
-import { loadVResto,addVResto } from "../actions/actions";
-import SnackBar from "./snackBar/AlreadyVisitedSnackBar";
+import { loadVResto,addVResto } from "../../actions/actions";
+import SnackBar from "../snackBar/AlreadyVisitedSnackBar";
 
 
 
@@ -65,16 +65,18 @@ function RestauComponent({ name,photo }) {
     e.stopPropagation();
     
     //this var set the date to "YYYY-MM-DD"
-    const  today = new Date().toISOString().slice(0, 10)
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     const data={
       name:name,
-      visiteddate:today
+      visiteddate:date
     }
     let alreadyVisited=false;
     VRestos.map(resto=>{
-      if(resto.name===name && resto.visiteddate===today){
+      if(resto.name===name && resto.visiteddate===date){
         alreadyVisited=true;
         setOpenErrorSnackBar(true);
+        return;
       }
     })
     if(!alreadyVisited){
@@ -86,14 +88,15 @@ function RestauComponent({ name,photo }) {
   }
   return (
       <>
+      <div>
     <SnackBar  open ={openErrorSnackBar} setClose={setOpenErrorSnackBar}  type={"error"} />
     <SnackBar  open ={openDoneSnackBar} setClose={setOpenDoneSnackBar} type={"success"} />
+    </div>
     <Paper className={classes.root}  style={{ backgroundImage: `url(${photo})`}} >
           <Typography
             className={classes.content}
-            variant={"h7"}
-            gutterBottom
-          >
+            variant={"h6"}
+            gutterBottom>
              {name} 
             <IconButton className={classes.icon} onClick={handle} >
             <CheckCircleIcon />

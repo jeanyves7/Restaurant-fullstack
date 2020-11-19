@@ -2,6 +2,8 @@ package com.cmeboot.app.controller;
 
 
 import com.cmeboot.app.model.VisitedRestaurants;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import com.cmeboot.app.service.IVisitedRestoService;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,17 +26,21 @@ public class VisitedRestaurantsController {
     }
 
     @RequestMapping(method = POST)
-    public VisitedRestaurants addResto(@RequestBody VisitedRestaurants visoRe){
-        return visoSer.addRestos(visoRe);
+    public ResponseEntity<VisitedRestaurants> addResto(@RequestBody VisitedRestaurants visoRe){
+        try {
+           return  new ResponseEntity<>(visoSer.addRestos(visoRe),HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
-    @RequestMapping(value = "/Sort/{Type}",method = GET)
-    public List<VisitedRestaurants> findOrder(@PathVariable("Type") String type){
-        if(type.contains("name")){
-            return visoSer.orderRestosName(type);
-        }
-        else {
-            return visoSer.orderRestosDate(type);
+    @GetMapping("/{type}")
+    public ResponseEntity<List<VisitedRestaurants>> findType(@PathVariable("type") String type){
+        try{
+            return new ResponseEntity<>(visoSer.findByType(type),HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 }

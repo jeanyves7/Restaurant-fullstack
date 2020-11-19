@@ -1,38 +1,41 @@
 import api from "./index"
 
+//api call for all the restaurants
 export const getRestos =  async (restos) => { 
+    //parsing the results of the action payload to be fit the api call
+
+    // reducing 1 from the actual page  because in spring boot the pages start from 0
     const pag=restos.action.action.page -1
     const realPage=pag.toString();
+
     const Type=restos.action.action.type;
-    const res = await api.get(`Restaurants/${Type}/?page=${realPage}&size=2`);
+    const size=restos.action.action.size;
+    
+    //making the call:
+    const res = await api.get(`Restaurants/${Type}/?page=${realPage}&size=${size}`);
     return res.data;
 }
 
-
+//api call to get the restaurants by name
 export const getNRestos =  async (restos) => { 
     const Name=restos.action.action.name;
+   //making the call
     const res = await api.get(`Restaurants/name/${Name}`);
     return res.data;
 }
 
-
+//api call to get the visited restaurants
 export const getVRestos= async () =>{
      const res = await api.get("VisitedRestaurants");
     return res.data;
 }
 
+//api call to set the visited restaurant
 export const postVRestos =  async (data) =>{
-    console.log(data)
     try {
         const res = await api.post("/VisitedRestaurants", data);
         return res.data;
     } catch (error) {
         console.log(error);
     }
-   
-}
-
-export const getRestosId= async (id) => { 
-    const res = await api.get(`Restaurants/id/${id}`);
-    return res.content;
 }

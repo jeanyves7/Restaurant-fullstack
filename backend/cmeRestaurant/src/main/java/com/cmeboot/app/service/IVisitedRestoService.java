@@ -7,9 +7,7 @@ import java.util.List;
 public interface IVisitedRestoService {
 
     VisitedRestaurants addRestos(VisitedRestaurants visiRes);
-
     List<VisitedRestaurants> findAll();
-    List<VisitedRestaurants> orderRestosName(String type);
-    List<VisitedRestaurants> orderRestosDate(String Type);
 
+    List<VisitedRestaurants> findByType(String Type);
 }

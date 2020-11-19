@@ -1,15 +1,12 @@
 import React from 'react';
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import {
     Paper,
     IconButton,
     Grid,
     Typography,
 } from "@material-ui/core";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 import {Home} from "@material-ui/icons";
-
-
 
 
 const useStyles = makeStyles((theme) => ({
@@ -24,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems:"center"
     },
     root:{
-        background:"gray",
+        background:"#757C88",
       
     },
     images:{
@@ -37,17 +34,16 @@ const useStyles = makeStyles((theme) => ({
 
 const Info = ({name,type,cost,addrss,num,image,close}) =>{
    
-    const attributes=[name,type,"cost for two: "+cost,addrss,num]
+    const attributes=["name: "+name,"type: "+type,"cost for two: "+cost,"address: "+addrss,"Phone Number: "+num]
     const classes = useStyles();
 
-    const theme=useTheme();
     
     const gap = () => {
         //constant to represent the gap between the attributes
         const spaceGap=[1,1,1];
         return (
         <Paper elevation={0}>
-        {spaceGap.map(i=>(<Typography variant={"h4"} style={{background:"gray",paddingTop:"20px"}}/> ))}
+        {spaceGap.map(i=>(<Typography variant={"h4"} style={{background:"#757C88",paddingTop:"20px"}}/> ))}
         </Paper>
         );
     }
@@ -85,7 +81,6 @@ const Info = ({name,type,cost,addrss,num,image,close}) =>{
                 </IconButton>
             {gap()}
             </Grid>
-        
         </Grid>
         </div>
         </>

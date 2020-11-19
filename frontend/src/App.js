@@ -4,9 +4,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 
 
-import Homepage from './components/header/Homepage';
+import Homepage from './components/RestoComponent/Homepage';
 import Header from "./components/header/Header";
-import VisitedRestaurants from "./components/header/VisitedRestaurants";
+import VisitedRestaurants from "./components/RestoComponent/VisitedRestaurants";
 
 
 

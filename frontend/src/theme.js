@@ -23,7 +23,6 @@ const theme = createMuiTheme({
             "light": "#ffd740",
             "dark": "#ff8f00"
         },
-        "contrastThreshold": 1.8
     },
     
 });

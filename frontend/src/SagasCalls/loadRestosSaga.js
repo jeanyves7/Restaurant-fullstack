@@ -1,7 +1,7 @@
 
 
 import {takeLatest, call, put} from 'redux-saga/effects'
-import {setType,LOAD_RESTO,setResto,loadingResto,setRestoError,setTotalPages} from "../actions/actions"
+import {LOAD_RESTO,setResto,loadingResto,setRestoError,setTotalPages} from "../actions/actions"
 import {getRestos,getNRestos} from "../api/apiCalls";
 
 
@@ -14,7 +14,7 @@ function* LoadRestoFlow(action){
    let isloading=true;
    yield put(loadingResto(isloading));
    try{
-    if(Object.keys(action.action).length===2){
+    if(Object.keys(action.action).length!=1){
         Resto= yield call(getRestos,{action});
    }
    else{

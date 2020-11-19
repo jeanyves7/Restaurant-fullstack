@@ -44,6 +44,16 @@ public class RestaurantController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/name/{name}")
+    public ResponseEntity<Page<Restaurants>> findNameRestaurants(@PathVariable("name") String name,Pageable pageable){
+        try{
+                return new ResponseEntity<>(restauService.findName(name,pageable),HttpStatus.OK);
+        }catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping("/id/{id}")
     public ResponseEntity<Optional<Restaurants>> findId(@PathVariable Long id){
         return new ResponseEntity<>(restauService.findId(id),HttpStatus.OK);

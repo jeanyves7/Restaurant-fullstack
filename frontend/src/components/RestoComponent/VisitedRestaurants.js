@@ -36,7 +36,7 @@ export default function VisitedRestaurants() {
    );
  }else{
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <div style={{ height: 600, width: '100%' }}>
       <SnackBar />
       <DataGrid  rows={UVRestos} columns={columns} />
     </div>

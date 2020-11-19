@@ -12,8 +12,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function LinearIndeterminate() {
+ 
   const classes = useStyles();
-
+  //we have two loaders that appears when we are making the api call
   return (
     <div className={classes.root}>
       <LinearProgress />

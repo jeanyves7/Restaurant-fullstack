@@ -5,12 +5,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {useDispatch,useSelector} from "react-redux";
-import {setType,setSearch} from "../../actions/actions"
+import {setSize,setSearch} from "../../actions/actions"
 
 const useStyles = makeStyles((theme) => ({
  
   formControl: {
-    minWidth: 100,
+    minWidth: 60,
     
     background:"white"
   },
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TypeInput() {
   const classes = useStyles();
-  const type= useSelector(state => state.Type.types);
+  const size= useSelector(state => state.Type.size);
   const [open, setOpen] =useState(false);
 
 
@@ -28,30 +28,26 @@ export default function TypeInput() {
 
   const Types=[
       {
-          value:"All",
+          value:"2",
           
       },
       {
-          value:"Lebanese"
+          value:"4"
       },
       {
-          value:"Japanese"
+          value:"6"
       },
       {
-          value:"Italian"
-      },{
-        value:"France"
-      },{
-          value:"American"
+          value:"8"
       }
   ]
 
 
   const handleChange = (event) => {
     const data=event.target.value
-    console.log(data);
+  //  console.log(data);
     dispatch(setSearch(""));
-    dispatch(setType(data));
+    dispatch(setSize(data));
   };
 
   const handleClose = () => {
@@ -65,19 +61,19 @@ export default function TypeInput() {
   return (
     <div>
       <FormControl className={classes.formControl}>
-        <InputLabel id="demo-controlled-open-select-label" >Type</InputLabel>
+        <InputLabel id="demo-controlled-open-select-label" >size</InputLabel>
         <Select
           labelId="demo-controlled-open-select-label"
           id="demo-controlled-open-select"
           open={open}
           onClose={handleClose}
           onOpen={handleOpen}
-          value={type}
+          value={size}
          onChange={handleChange}
         >
           {
-              Types.map(type => (
-                  <MenuItem key={type.value} value={type.value}>{type.value}</MenuItem>
+              Types.map(size => (
+                  <MenuItem key={size.value} value={size.value}>{size.value}</MenuItem>
               ))
           }
         </Select>

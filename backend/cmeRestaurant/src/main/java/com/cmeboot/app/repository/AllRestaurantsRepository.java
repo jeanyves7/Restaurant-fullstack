@@ -12,5 +12,6 @@ import java.util.Optional;
 @Repository
 public interface AllRestaurantsRepository extends PagingAndSortingRepository<Restaurants,Long> {
     Page<Restaurants> findBytypeContaining(String type, Pageable pageable);
+    Page<Restaurants> findByNameIgnoreCase(String name,Pageable pageable);
     Optional<Restaurants> findById(Long id);
 }

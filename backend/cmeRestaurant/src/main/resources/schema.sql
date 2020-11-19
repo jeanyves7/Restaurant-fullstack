@@ -15,5 +15,5 @@ Create TABLE IF NOT EXISTS visitedrestaurants(
     id SERIAL,
     name VARCHAR(50),
     visiteddate date,
-    primary key (id)
+    primary key (name,visiteddate)
 );

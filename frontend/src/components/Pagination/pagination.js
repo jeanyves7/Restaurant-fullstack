@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Pagination from '@material-ui/lab/Pagination';
 import {useDispatch,useSelector} from "react-redux";
-import {setPage} from "../actions/actions";
+import {setPage} from "../../actions/actions";
 
 const useStyles = makeStyles((theme) => ({
   root: {

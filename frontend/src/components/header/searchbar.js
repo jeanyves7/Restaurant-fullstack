@@ -1,12 +1,14 @@
 import React,{useState} from 'react';
-import {AppBar,Toolbar,Button,InputBase,Box} from '@material-ui/core';
-import {useDispatch} from "react-redux";
+import {AppBar,Toolbar,Button,InputBase,Box,useTheme} from '@material-ui/core';
+import {useDispatch,useSelector} from "react-redux";
 import Typography from '@material-ui/core/Typography';
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
-import {loadResto,setType} from "../../actions/actions";
+import {loadResto,setType,setSearch,setPage,setSize} from "../../actions/actions";
 import TypeInput from "./typeInput";
+import SizeInput from "./sizeInput";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -27,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
     marginLeft: 0,
+   
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(1),
@@ -54,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       width: '12ch',
       '&:focus': {
-        width: '20ch',
+        width: "20ch",
       },
     },
   },
@@ -62,69 +65,80 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SearchAppBar() {
   const classes = useStyles();
-  const [search,setSearch]=useState("");
-  const [done,setDone]=useState(true);
+  
+  const searchName= useSelector(state => state.Type.search);
+  const [current,setCurrent]=useState(searchName)
+ 
   const dispatch = useDispatch();
 
-  const backHome = ()=> {
-    const data={
-      type:"All",
-      page:1
-    }
-    dispatch(setType("All"))
-    dispatch(loadResto(data))
-  }
+  const theme=useTheme();
+  const isMobile=useMediaQuery(theme.breakpoints.down("xs"));
 
   const updateSearch = e =>{
-    setSearch(e.target.value)
-
+    setCurrent(e.target.value)
   }
 
 
   const getSearch = e =>{
     e.preventDefault();
-    const Name={name:search}
+    const Name={name:current}
+    dispatch(setSearch(current))
     dispatch(loadResto(Name));
+  }
+
+  const displaySearchInput = () =>{
+    return ( 
+    <Box  p={1}>
+      <div className={classes.search}>
+          <div className={classes.searchIcon}>
+              <SearchIcon  />
+            </div>
+           <InputBase
+            placeholder="Search…"
+            value={current}
+            onChange={updateSearch}
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput,
+            }}
+            inputProps={{ 'aria-label': 'search' }}
+            />
+      </div>
+  </Box>);
   }
 
   return (
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Box   spacing={5} className={classes.headers}>
-            <Box item p={1}m={1} >
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon  />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              value={search}
-              onChange={updateSearch}
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
-          </Box>
-          <Box item p={1}m={1}>
-          
-
-          <Button style={{background:"white"}} onClick={getSearch} >
-            <Typography >SEARCH</Typography>
-          </Button>
-          </Box>
-          <Box item p={1}m={1}>
-          <Button style={{background:"white"}} onClick={backHome} >
-            <Typography >Back Home</Typography>
-          </Button>
-          </Box>
+            <Box   className={classes.headers}>
+              {!isMobile? (
+                displaySearchInput()
+             )
+               : <> </>}
+              <Box  p={1}>
+                  <Button style={{background:"white"}} onClick={getSearch} >
+                    <Typography >SEARCH</Typography>
+                  </Button>
+              </Box>
+              
+              <Box p={1}>
+              <SizeInput />
+              </Box>
               <TypeInput />
-          </Box>
-        </Toolbar>
-      </AppBar>
+            </Box>
+      </Toolbar>
+    </AppBar>
+    {isMobile?
+         <AppBar position="static" style={{background:"#778899"}}>
+        <Toolbar>
+            <Box   className={classes.headers}>
+               {displaySearchInput()}
+            </Box>
+          </Toolbar>
+    </AppBar>
+    :<> </>
+  }
     </div>
   );
 }

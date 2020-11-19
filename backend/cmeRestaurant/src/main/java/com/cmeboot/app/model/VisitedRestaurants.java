@@ -16,10 +16,11 @@ import javax.persistence.Column;
 public class VisitedRestaurants {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="Id")
     private Long id;
 
-    @Column(name="name")
+    @Column(name="Name")
     private String name;
 
     @Column(name="visiteddate")
