@@ -20,6 +20,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SnackBar() {
   const classes = useStyles();
+  
+  //using the open state to display an error using snackBar
   const open= useSelector(state => state.Restaurants.error);
     
   const dispatch = useDispatch();

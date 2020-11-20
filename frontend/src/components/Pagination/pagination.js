@@ -16,12 +16,14 @@ export default function PaginationControlled() {
   
   const classes = useStyles();
   
-  
+  //getting the actual page from the store
   const page= useSelector(state => state.Type.page);
+  //getting the total number of pages available in the backend server
   const pages=useSelector(state=>state.Restaurants.totalPages);
   
   const dispatch = useDispatch();
 
+  //on change of 
   const handleChange = (event, value) => {
     dispatch(setPage(value)) 
   };

@@ -10,7 +10,7 @@ import {
   MenuItem,
   Menu
 } from "@material-ui/core";
-import {Restaurant,RestaurantMenuTwoTone,CakeTwoTone} from "@material-ui/icons"
+import {Restaurant,RestaurantMenuTwoTone,RestaurantRounded} from "@material-ui/icons"
 import { Link } from "react-router-dom";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import {loadResto,setType,setSearch,setPage,setSize} from "../../actions/actions";
@@ -54,7 +54,7 @@ name:{
 // Array of components that are present in the header
 const navLinks = [
   { title: `Home`, path: `/` },
-  { title: `Visited`, path: `/VisitedRestaurants` }
+  { title: `Visted Restaurants`, path: `/VisitedRestaurants` }
 ];
 
 
@@ -71,20 +71,24 @@ const  Header= () => {
   const isMobile=useMediaQuery(theme.breakpoints.down("xs"));
   const dispatch = useDispatch();
 
-  const backHome = ()=> {
+
+  // when we click on the home button we want it to re-render the default element
+  const handleClick =() => {
     const data={
       type:"All",
       page:1,
       size:4,
     }
+    //dispatching the default data 
     dispatch(setPage(1));
     dispatch(setSize(4));
     dispatch(setSearch(""));
     dispatch(setType("All"));
     dispatch(loadResto(data));
+
   }
 
-
+  // parameter to controle the alignment of the name in mobile and normal forme 
   let NAME;
   if(isMobile){
     NAME=classes.name
@@ -92,6 +96,7 @@ const  Header= () => {
     NAME=classes.navDisplayFlex
   }
 
+  // to handle the menu when we reach the mobile breakPoint zone
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -100,74 +105,72 @@ const  Header= () => {
   return (
     <AppBar position="relative" style={{background:"white"}}>
       <Toolbar>
-    
          {isMobile ?  
          (<>
-             <IconButton 
+            <IconButton 
                 edge="start"
                 className={classes.menuButton} 
                 color="inherit" 
                 aria-label="menu"
                 onClick={handleMenu}
                 >
-           
                <RestaurantMenuTwoTone color="primary"/>
-              </IconButton>
+            </IconButton>
             <Menu
-                 id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                 vertical: 'top',
-                 horizontal: 'right',
-               }}
-                keepMounted
-                transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-               }}
-               open={open}
-               onClose={() => setAnchorEl(null)}
-              >
-              {navLinks.map(({ title, path }) => (
-                  <Link to={path} key={title} className={classes.linkText}>
-                          <MenuItem key={title} >{title}</MenuItem>
-                  </Link>
-               ))}
+                    id="menu-appbar"
+                    anchorEl={anchorEl}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                      }}
+                    keepMounted
+                    transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right',
+                      }}
+                    open={open}
+                    onClose={() => setAnchorEl(null)}
+                  >
+                  
+                        <Link to="/"  className={classes.linkText}>
+                                <MenuItem  onClick={handleClick} >Home</MenuItem>
+                        </Link>
+                        <Link to="/VisitedRestaurants"  className={classes.linkText}>
+                                <MenuItem  onClick={handleClick} > Visted Restaurants</MenuItem>
+                        </Link>
             </Menu>
-            
-             </>) 
-
+          </>) 
       :
-      //this is the display of the header if its not mobile form
+      //this is the display of the header if its not in mobile forme
         <Box  className={classes.navbarDisplayFlex}>
             <Box >
                 <IconButton edge="start" color="inherit" aria-label="Restaurants" style={{alignSelf:"flex-staart"}} >
                 <Restaurant fontSize="large" color="primary" />
                 </IconButton>
             </Box>
-                
-            <Box p={1}   >
-                    <Link to="/" className={classes.linkText}  >
-                        <Button button onClick={backHome}>
+            
+                <Box p={1}   >
+                    <Link to="/" className={classes.linkText}>
+                        <Button button onClick={handleClick}>
                             <Typography color="primary"   > Home</Typography>
                         </Button>
                     </Link>
                 </Box>
                 <Box p={1}   >
-                    <Link to="/VisitedRestaurants" className={classes.linkText}  >
-                        <Button button>
-                            <Typography color="primary"   > Visited Restaurants</Typography>
+                    <Link to="/VisitedRestaurants" className={classes.linkText}>
+                        <Button button onClick={handleClick}>
+                            <Typography color="primary"   > Visted Restaurants</Typography>
                         </Button>
                     </Link>
                 </Box>
         </Box>}
         <Box className={NAME}>
           <IconButton color="primary">
-            <CakeTwoTone/>
-            <Typography color="primary" variant="h5"> CmR  </Typography>
+                <RestaurantRounded/>
+                <Typography color="primary" variant="h5"> CmR  </Typography>
           </IconButton>
           
-            </Box>
+        </Box>
       </Toolbar>
   </AppBar>
   );

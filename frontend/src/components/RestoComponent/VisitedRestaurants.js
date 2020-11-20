@@ -16,6 +16,7 @@ const columns = [
 
 export default function VisitedRestaurants() {
 
+  //loading the Visited Restaurants from the backend
   const VRestos = useSelector(state => state.Visited.Visited);
   const loading = useSelector(state => state.Visited.loading);
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ export default function VisitedRestaurants() {
     VisitedDate:(moment(resto.visiteddate,'YYYY-MMDD').format('MMMM Do YYYY'))
   } ))
 
+  //if we still loading the data we want to show loaders
  if(loading){
    return (
     <Loader />

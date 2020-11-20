@@ -3,6 +3,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 
+
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -18,8 +19,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SnackBar({type,open,setClose}) {
   const classes = useStyles();
- 
-
+  
+  // we want to handle the severity of the action
   let message;
   if(type==="error"){
     message="You already Visited this Restaurant today!";

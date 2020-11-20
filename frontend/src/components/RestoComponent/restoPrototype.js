@@ -54,6 +54,7 @@ function RestauComponent({ name,photo }) {
   //handle when the customer click on the visited button
   const [visited,setVisited]=useState(false)
 
+  // if we visit the restaurant we want to load the new value
   if(visited){
     dispatch(loadVResto());
     setVisited(false);
@@ -71,6 +72,7 @@ function RestauComponent({ name,photo }) {
       name:name,
       visiteddate:date
     }
+    // if the restaurant name and date alreadyExists in the table we don't want to dispatch the action
     let alreadyVisited=false;
     VRestos.map(resto=>{
       if(resto.name===name && resto.visiteddate===date){
@@ -79,31 +81,31 @@ function RestauComponent({ name,photo }) {
         return;
       }
     })
+    //if we haven't visited the restaurant we want to save it
     if(!alreadyVisited){
       dispatch(addVResto(data));
       setOpenDoneSnackBar(true);
       setVisited(true);
     }
-    
   }
   return (
-      <>
+    <>
       <div>
-    <SnackBar  open ={openErrorSnackBar} setClose={setOpenErrorSnackBar}  type={"error"} />
-    <SnackBar  open ={openDoneSnackBar} setClose={setOpenDoneSnackBar} type={"success"} />
-    </div>
-    <Paper className={classes.root}  style={{ backgroundImage: `url(${photo})`}} >
+          <SnackBar  open ={openErrorSnackBar} setClose={setOpenErrorSnackBar}  type={"error"} />
+          <SnackBar  open ={openDoneSnackBar} setClose={setOpenDoneSnackBar} type={"success"} />
+      </div>
+      <Paper className={classes.root}  style={{ backgroundImage: `url(${photo})`}} >
           <Typography
-            className={classes.content}
-            variant={"h6"}
-            gutterBottom>
-             {name} 
+              className={classes.content}
+              variant={"h6"}
+              gutterBottom>
+              {name} 
             <IconButton className={classes.icon} onClick={handle} >
-            <CheckCircleIcon />
-          </IconButton>
+              <CheckCircleIcon />
+            </IconButton>
           </Typography>  
       </Paper>
-      </>
+    </>
     
   );
 }

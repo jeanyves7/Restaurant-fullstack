@@ -1,11 +1,14 @@
 import {SET_TYPE,SET_PAGE,SET_SEARCH,SET_SIZE} from "../actions/actions"
 
+
+//default initial states of the type,pages,size and search field
 const initalState={
     types:"All",
     size:4,
     page:1,
     search:"",
 }
+
 const TypeReducer =(state=initalState,action)=>{
     switch(action.type){
         case SET_TYPE:

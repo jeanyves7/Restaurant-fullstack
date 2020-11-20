@@ -34,54 +34,54 @@ const useStyles = makeStyles((theme) => ({
 
 const Info = ({name,type,cost,addrss,num,image,close}) =>{
    
-    const attributes=["name: "+name,"type: "+type,"cost for two: "+cost,"address: "+addrss,"Phone Number: "+num]
+    // preparing the fields that will be displayed
+    const attributes=["Name: "+name,"Type: "+type,"Cost for two: "+cost,"Address: "+addrss,"Phone Number: "+num]
     const classes = useStyles();
 
-    
+    // funstion to print a gap between the papers
     const gap = () => {
         //constant to represent the gap between the attributes
         const spaceGap=[1,1,1];
         return (
         <Paper elevation={0}>
-        {spaceGap.map(i=>(<Typography variant={"h4"} style={{background:"#757C88",paddingTop:"20px"}}/> ))}
+                {spaceGap.map(i=>(<Typography variant={"h4"} style={{background:"#757C88",paddingTop:"20px"}}/> ))}
         </Paper>
         );
     }
 
-
+    //function responsible to fill the info with the correct data
     const fill = (text) =>{
         return (
         <>
         {gap()}
         <Paper  elevation={3} >
-        <Typography variant={"h4"} style={{background:"white",borderRadius:"10%"}} color="primary"> {text} </Typography>
+            <Typography variant={"h4"} style={{background:"white",borderRadius:"10%"}} color="primary"> {text} </Typography>
         </Paper>
         </>
         );
     }
 
     
-
-    return (
-    <>
+return (
+        <>
         <div className={classes.root}>
-        <Grid container spacing={4} flexwrap="no-wrap"  className={classes.RestoContainer}>
-            <Grid item xs={6} >
-                <img className={classes.images} src={image}  alt=""/> 
-            </Grid>
-            <Grid item xs={12} md={6}>
-
+            <Grid container spacing={4} flexwrap="no-wrap"  className={classes.RestoContainer}>
+                    <Grid item xs={6} >
+                        <img className={classes.images} src={image}  alt=""/> 
+                    </Grid>
+                <Grid item xs={12} md={6}>
                 {attributes.map(atr=>(
+                    // displaying the info 
                     fill(atr)
                 ))}
-            {gap()}
-            <IconButton  color="primary" style={{background:"white"}} onClick={close} >
-                <Home/>
-                <Typography variant={"h4"}  color="primary"> Home </Typography>
+                {gap()}
+                <IconButton  color="primary" style={{background:"white"}} onClick={close} >
+                    <Home/>
+                    <Typography variant={"h4"}  color="primary"> Home </Typography>
                 </IconButton>
-            {gap()}
+                {gap()}
+                </Grid>
             </Grid>
-        </Grid>
         </div>
         </>
     );

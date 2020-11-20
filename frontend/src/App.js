@@ -2,8 +2,6 @@ import React from "react";
 import { makeStyles } from "@material-ui/core";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-
-
 import Homepage from './components/RestoComponent/Homepage';
 import Header from "./components/header/Header";
 import VisitedRestaurants from "./components/RestoComponent/VisitedRestaurants";
@@ -28,10 +26,10 @@ const App = () => {
     <div className={classes.root}> 
     <Router>
           <Header/>
-          <Switch>
+        <Switch>
             <Route path="/" exact component={Homepage}/>
             <Route path="/VisitedRestaurants"  component={VisitedRestaurants}/>
-          </Switch>
+        </Switch>
     </Router>
     </div>
   );

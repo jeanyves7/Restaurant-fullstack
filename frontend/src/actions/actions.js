@@ -117,6 +117,7 @@ export const setSearch=(data)=>({
     payload:data    
 });
 
+//15
 export const setSize=(data)=>({
     type:SET_SIZE,
     payload:data

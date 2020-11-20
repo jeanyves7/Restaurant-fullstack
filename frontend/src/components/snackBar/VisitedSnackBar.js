@@ -20,10 +20,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SnackBar() {
   const classes = useStyles();
+   //using the open state to display an error using snackBar
   const open= useSelector(state =>state.Visited.error);
     
   const dispatch = useDispatch();
-
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {

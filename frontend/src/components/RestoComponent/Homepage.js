@@ -68,7 +68,7 @@ const HomePage = () =>{
     //This loading state is for the loaders
     const Loading=useSelector(state=>state.Restaurants.loading);
     
-    //States responsable for displaying the current type and page
+    //States responsable for displaying the current type and page and size per page
     const type= useSelector(state => state.Type.types);
     const page= useSelector(state => state.Type.page);
     const size= useSelector(state => state.Type.size);
@@ -99,7 +99,7 @@ const HomePage = () =>{
     dispatch(setPage(1));
     getRestos();
    },[type])
-
+   // we render based on the size selected 
    useEffect(()=>{
     dispatch(setPage(1));
     getRestos();
@@ -129,20 +129,20 @@ const HomePage = () =>{
         <Box  spacing={5} className={classes.RestoContainer} >
           {Restos.map(resto =>(
               //maping through the list of fetched Restos
-               <Box   p={1} m={1} key={resto.id}>
-               <Link onClick={()=>handleClickOpen(resto.id)} to="" className={classes.linkText} >
+              <Box   p={1} m={1} key={resto.id}>
+                  <Link onClick={()=>handleClickOpen(resto.id)} to="" className={classes.linkText} >
                          <Resto  key={resto.id} name={resto.name} photo={resto.img}  />
-                </Link>
-                <Dialog fullScreen open={open===resto.id} onClose={handleClose} TransitionComponent={Transition} key={resto.id} >
+                  </Link>
+                  <Dialog fullScreen open={open===resto.id} onClose={handleClose} TransitionComponent={Transition} key={resto.id} >
                       <RestoInfo  key={resto.id}  name={resto.name} type={resto.type} cost={resto.costLL} addrss={resto.address} num={resto.phoneNumber} image={resto.img} close={handleClose}  />
-               </Dialog>
-               </Box>
+                  </Dialog>
+              </Box>
           ))}
         </Box>
         <Box  display="flex" style={{textAlign:"center"}} >
-          <Box   margin="auto">
-        <Pagina />
-        </Box>
+            <Box   margin="auto">
+                <Pagina />
+            </Box>
         </Box>
         </>
         :

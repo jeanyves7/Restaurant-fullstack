@@ -1,5 +1,6 @@
 import { SET_VRESTO,SET_VISITED_ERROR,LOADING_VRESTO_DATA} from "../actions/actions";
 
+//visited restaurants initial states
 const initialState ={
     Visited:[],
     loading:true,

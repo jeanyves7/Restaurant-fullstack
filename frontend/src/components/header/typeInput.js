@@ -16,44 +16,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const Types=["All","Lebanese","American","Japanese","France","Italian","Mexican"]
 
 export default function TypeInput() {
   const classes = useStyles();
+ 
+  //getting the type from the store 
   const type= useSelector(state => state.Type.types);
+  //handle drop down menu
   const [open, setOpen] =useState(false);
-
-
-  const dispatch = useDispatch();
-
-
-  const Types=[
-      {
-          value:"All",
-          
-      },
-      {
-          value:"Lebanese"
-      },
-      {
-          value:"Japanese"
-      },
-      {
-          value:"Italian"
-      },{
-        value:"France"
-      },{
-          value:"American"
-      }
-  ]
-
-
-  const handleChange = (event) => {
-    const data=event.target.value
-    console.log(data);
-    dispatch(setSearch(""));
-    dispatch(setType(data));
-  };
-
   const handleClose = () => {
     setOpen(false);
   };
@@ -62,6 +33,19 @@ export default function TypeInput() {
     setOpen(true);
   };
 
+  const dispatch = useDispatch();
+
+  //handle the change of input
+  const handleChange = (event) => {
+    const data=event.target.value
+    console.log(data);
+    //setting the search field to an empty string
+    dispatch(setSearch(""));
+    //dispatching the data
+    dispatch(setType(data));
+  };
+
+ 
   return (
     <div>
       <FormControl className={classes.formControl}>
@@ -77,7 +61,7 @@ export default function TypeInput() {
         >
           {
               Types.map(type => (
-                  <MenuItem key={type.value} value={type.value}>{type.value}</MenuItem>
+                  <MenuItem key={type} value={type}>{type}</MenuItem>
               ))
           }
         </Select>
