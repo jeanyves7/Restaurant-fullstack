@@ -5,6 +5,7 @@ import {useDispatch,useSelector} from "react-redux";
 import  moment from "moment";
 import SnackBar from "../snackBar/VisitedSnackBar";
 import Loader from "../loader/loaders";
+import SearchBar from "../header/VisitedSearchBar";
 
 const columns = [
   { field: 'name',width: 180,
@@ -19,11 +20,21 @@ export default function VisitedRestaurants() {
   //loading the Visited Restaurants from the backend
   const VRestos = useSelector(state => state.Visited.Visited);
   const loading = useSelector(state => state.Visited.loading);
+  const VisitedType= useSelector(state => state.Type.VisitedType);
   const dispatch = useDispatch();
   
   useEffect(()=>{
-    dispatch(loadVResto());
-  },[])
+    getVisited();
+    console.log(5);
+  },[VisitedType])
+
+  const getVisited =() =>{
+    const data={
+      type:VisitedType
+    }
+    console.log(5);
+    dispatch(loadVResto(data));
+  }
 
   const UVRestos=VRestos.map(resto =>({
     id:resto.id,
@@ -38,10 +49,13 @@ export default function VisitedRestaurants() {
    );
  }else{
   return (
+    <>
+    <SnackBar />
+    <SearchBar/>
     <div style={{ height: 600, width: '100%' }}>
-      <SnackBar />
       <DataGrid  rows={UVRestos} columns={columns} />
     </div>
+    </>
   );
  }
 }

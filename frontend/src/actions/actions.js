@@ -24,6 +24,7 @@ export const SET_PAGE="SET_PAGE";                 //12
 export const SET_TYPE="SET_TYPE";                 //13
 export const SET_SEARCH="SET_SEARCH";             //14
 export const SET_SIZE="SET_SIZE";                 //15
+export const SET_VISITED_TYPE="SET_VISITED_TYPE";  //16
 
 //Visited section:
 //1
@@ -33,8 +34,9 @@ export const addVResto = (Resto) =>({
 });
 
 //2
-export const loadVResto =() =>({
-    type:LOAD_VRESTO
+export const loadVResto =(data) =>({
+    type:LOAD_VRESTO,
+    payload:data
 });
 
 //3
@@ -96,7 +98,7 @@ export const setVisitedError=(data)=>({
 //11
 export const setTotalPages=(data)=>({
     type:SET_TOTAL_PAGES,
-    payload:data
+    payload:data,
 });
 
 //12
@@ -108,17 +110,23 @@ export const setPage=(data)=>({
 //13
 export const setType =(type)=>({
     type:SET_TYPE,
-    payload:type
+    payload:type,
 });
 
 //14
 export const setSearch=(data)=>({
     type:SET_SEARCH,
-    payload:data    
+    payload:data,    
 });
 
 //15
 export const setSize=(data)=>({
     type:SET_SIZE,
-    payload:data
+    payload:data,
+});
+
+//16 
+export const setVisitedType=(data)=>({
+    type:SET_VISITED_TYPE,
+    payload:data,
 });

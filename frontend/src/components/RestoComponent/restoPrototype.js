@@ -49,6 +49,7 @@ function RestauComponent({ name,photo }) {
   const [openErrorSnackBar,setOpenErrorSnackBar]=useState(false);
   const [openDoneSnackBar,setOpenDoneSnackBar]=useState(false);
   const VRestos = useSelector(state => state.Visited.Visited);
+  const VisitedType= useSelector(state => state.Type.VisitedType);
   const dispatch = useDispatch();
 
   //handle when the customer click on the visited button
@@ -56,7 +57,10 @@ function RestauComponent({ name,photo }) {
 
   // if we visit the restaurant we want to load the new value
   if(visited){
-    dispatch(loadVResto());
+    const data={
+      type:VisitedType
+    }
+    dispatch(loadVResto(data));
     setVisited(false);
   }
 

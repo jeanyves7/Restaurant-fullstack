@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
       '&:focus': {
         width: "20ch",
       },
-    },
+    }
   },
 }));
 
@@ -79,6 +79,13 @@ export default function SearchAppBar() {
   //Breakpoints responsible to tell if we are in mobile forme 
   const theme=useTheme();
   const isMobile=useMediaQuery(theme.breakpoints.down("xs"));
+
+  let margin;
+  if(!isMobile){
+    margin="15%"
+  }else{
+    margin="0%"
+  }
 
   //function to update the value of the search name
   const updateSearch = e =>{
@@ -137,7 +144,7 @@ return (
                       <Typography >SEARCH</Typography>
                   </Button>
               </Box>
-              <Box  p={1}>
+              <Box  p={1} style={{marginRight:margin}} >
               <SizeInput />
               </Box>
               

@@ -5,7 +5,7 @@ const initialState ={
     Visited:[],
     loading:true,
     error:false,
-    
+
 }
 
 const VisitedReducer = (state=initialState,action) =>{

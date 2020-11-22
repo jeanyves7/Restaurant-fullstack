@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
+    color:"white",
       [theme.breakpoints.down("xs")] :{
     flexGrow: 1
       }
@@ -47,7 +48,10 @@ name:{
   flexDirection:`row`,
   flex:1,
   justifyContent: "center"
-}
+},
+  text_color:{
+      color:"white",
+    }
 
 }));
 
@@ -103,14 +107,13 @@ const  Header= () => {
 
 
   return (
-    <AppBar position="relative" style={{background:"white"}}>
+    <AppBar position="relative" style={{background:"rgb(245,245,220)"}}>
       <Toolbar>
          {isMobile ?  
          (<>
             <IconButton 
                 edge="start"
-                className={classes.menuButton} 
-                color="inherit" 
+                className={classes.menuButton}  
                 aria-label="menu"
                 onClick={handleMenu}
                 >

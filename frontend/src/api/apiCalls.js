@@ -25,8 +25,9 @@ export const getNRestos =  async (restos) => {
 }
 
 //api call to get the visited restaurants
-export const getVRestos= async () =>{
-     const res = await api.get("VisitedRestaurants");
+export const getVRestos= async (data) =>{
+    const type=data.action.payload.type
+    const res = await api.get(`VisitedRestaurants/${type}`);
     return res.data;
 }
 

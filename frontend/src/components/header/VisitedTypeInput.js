@@ -5,7 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {useDispatch,useSelector} from "react-redux";
-import {setType,setSearch} from "../../actions/actions"
+import {setVisitedType} from "../../actions/actions"
 
 const useStyles = makeStyles((theme) => ({
  
@@ -22,7 +22,9 @@ export default function TypeInput() {
   const classes = useStyles();
  
   //getting the type from the store 
-  const type= useSelector(state => state.Type.types);
+  const VisitedType= useSelector(state => state.Type.VisitedType);
+  const dispatch = useDispatch();
+  
   //handle drop down menu
   const [open, setOpen] =useState(false);
   const handleClose = () => {
@@ -33,16 +35,12 @@ export default function TypeInput() {
     setOpen(true);
   };
 
-  const dispatch = useDispatch();
-
   //handle the change of input
   const handleChange = (event) => {
-    const data=event.target.value
-    console.log(data);
-    //setting the search field to an empty string
-    dispatch(setSearch(""));
+    const type=event.target.value;
+    //console.log(type);
     //dispatching the data
-    dispatch(setType(data));
+    dispatch(setVisitedType(type));
   };
 
  
@@ -56,7 +54,7 @@ export default function TypeInput() {
           open={open}
           onClose={handleClose}
           onOpen={handleOpen}
-          value={type}
+          value={VisitedType}
          onChange={handleChange}
         >
           {
