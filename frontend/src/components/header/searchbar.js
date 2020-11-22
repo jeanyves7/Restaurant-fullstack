@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
-import {loadResto,setType,setSearch,setPage,setSize} from "../../actions/actions";
+import {loadResto,setSearch} from "../../actions/actions";
 import TypeInput from "./typeInput";
 import SizeInput from "./sizeInput";
 
@@ -129,14 +129,18 @@ return (
                 // if we are in mobile forme we don't want to display anything in the searchBar 
                : <> </>}
               <Box  p={1}>
-                  <Button style={{background:"white"}} onClick={getSearch} >
+              <TypeInput />
+              </Box>
+              <Box p={1}>
+             
+              <Button style={{background:"orange"}} onClick={getSearch} >
                       <Typography >SEARCH</Typography>
                   </Button>
               </Box>
-              <Box p={1}>
-                  <SizeInput />
+              <Box  p={1}>
+              <SizeInput />
               </Box>
-              <TypeInput />
+              
             </Box>
       </Toolbar>
     </AppBar>

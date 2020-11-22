@@ -107,4 +107,16 @@ public class Restaurants {
         this.img = img;
     }
 
+    @Override
+    public String toString() {
+        return "Restaurants{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", cost='" + cost + '\'' +
+                ", address='" + address + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", img='" + img + '\'' +
+                '}';
+    }
 }

@@ -136,7 +136,7 @@ const  Header= () => {
                                 <MenuItem  onClick={handleClick} >Home</MenuItem>
                         </Link>
                         <Link to="/VisitedRestaurants"  className={classes.linkText}>
-                                <MenuItem  onClick={handleClick} > Visted Restaurants</MenuItem>
+                                <MenuItem > Visted Restaurants</MenuItem>
                         </Link>
             </Menu>
           </>) 

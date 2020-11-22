@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.Optional;
 
+//this interface shows the methods that are available to the Restaurants service
 
 public interface IRestaurantsService {
 

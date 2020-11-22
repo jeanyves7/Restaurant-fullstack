@@ -1,6 +1,5 @@
 package com.cmeboot.app.controller;
 
-
 import com.cmeboot.app.model.VisitedRestaurants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,14 +20,24 @@ public class VisitedRestaurantsController {
     public VisitedRestaurantsController(IVisitedRestoService visoSer) { this.visoSer=visoSer;}
 
     @RequestMapping(method = GET)
-    public List<VisitedRestaurants> findAllVisited(){
-        return visoSer.findAll();
+    public ResponseEntity<List<VisitedRestaurants>> findAllVisited() {
+        try {
+            return new ResponseEntity<>(visoSer.findAll(),HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(null,HttpStatus.OK);
+        }
     }
 
     @RequestMapping(method = POST)
     public ResponseEntity<VisitedRestaurants> addResto(@RequestBody VisitedRestaurants visoRe){
         try {
-           return  new ResponseEntity<>(visoSer.addRestos(visoRe),HttpStatus.OK);
+            if(visoSer.CheckRecord(visoRe)) {
+                return new ResponseEntity<>(visoSer.addRestos(visoRe), HttpStatus.OK);
+            }
+            else{
+                System.out.println("already visited");
+                return new ResponseEntity<>(null,HttpStatus.OK);
+            }
         }catch(Exception e){
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -37,6 +46,9 @@ public class VisitedRestaurantsController {
     @GetMapping("/{type}")
     public ResponseEntity<List<VisitedRestaurants>> findType(@PathVariable("type") String type){
         try{
+            if(type.contentEquals("All")){
+                return this.findAllVisited();
+            }
             return new ResponseEntity<>(visoSer.findByType(type),HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

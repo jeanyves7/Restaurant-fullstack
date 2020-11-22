@@ -44,6 +44,15 @@ public class VisitedRestaurants {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return "VisitedRestaurants{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", visiteddate=" + visiteddate +
+                '}';
+    }
+
     public String getName() {
         return name;
     }
