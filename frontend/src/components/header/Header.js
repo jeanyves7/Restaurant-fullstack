@@ -134,16 +134,11 @@ const  Header= () => {
                     open={open}
                     onClose={() => setAnchorEl(null)}
                   >
-                  
                         <Link to="/"  className={classes.linkText}>
                                 <MenuItem  onClick={handleClick} >Home</MenuItem>
                         </Link>
                         <Link to="/VisitedRestaurants"  className={classes.linkText}>
-<<<<<<< HEAD
                                 <MenuItem > Visted Restaurants</MenuItem>
-=======
-                                <MenuItem   > Visted Restaurants</MenuItem>
->>>>>>> 48b94d60c19429f9e389015bcdbcf0bd48cd48f0
                         </Link>
             </Menu>
           </>) 
@@ -155,7 +150,6 @@ const  Header= () => {
                 <Restaurant fontSize="large" color="primary" />
                 </IconButton>
             </Box>
-            
                 <Box p={1}   >
                     <Link to="/" className={classes.linkText}>
                         <Button button onClick={handleClick}>
@@ -165,8 +159,8 @@ const  Header= () => {
                 </Box>
                 <Box p={1}   >
                     <Link to="/VisitedRestaurants" className={classes.linkText}>
-                        <Button button onClick={handleClick}>
-                            <Typography color="primary"   > Visted Restaurants</Typography>
+                        <Button>
+                            <Typography color="primary"> Visted Restaurants</Typography>
                         </Button>
                     </Link>
                 </Box>
@@ -176,7 +170,6 @@ const  Header= () => {
                 <RestaurantRounded/>
                 <Typography color="primary" variant="h5"> CmR  </Typography>
           </IconButton>
-          
         </Box>
       </Toolbar>
   </AppBar>

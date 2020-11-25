@@ -27,6 +27,23 @@ public class VisitedRestosService implements IVisitedRestoService {
         return visitedRepo.findAll();
     }
 
+
+
+    //method to return the visited restaurants by type
+    @Override
+    public List<VisitedRestaurants> findByType(String Type) {
+        // first step get all the restaurants by the chosen type
+        List<Restaurants> AllType= AllRepo.findByType(Type);
+        // secondly get the names of the restaurants that have the chosen type
+        ArrayList<String> names=filterName(AllType);
+
+        // after that,  we get all the available restaurants in the visited list
+        List<VisitedRestaurants> AllVisited=this.findAll();
+
+        // In the end we filter the  visited restaurants that matches the chosen type
+        return AllVisited.stream().filter(visitedRestaurants -> names.contains(visitedRestaurants.getName())).collect(Collectors.toList());
+    }
+
     //method to return a list of filtered restaurants only by name
     //it's private because we don't want to show it to the user
     private ArrayList<String> filterName(List<Restaurants> types){
@@ -37,25 +54,10 @@ public class VisitedRestosService implements IVisitedRestoService {
         return names;
     }
 
-    //method to return the visited restaurants by type
-    @Override
-    public List<VisitedRestaurants> findByType(String Type) {
-        // first step get all the restaurants by the chosen type
-        List<Restaurants> AllType= AllRepo.findByType(Type);
-        // secondly get the names of the restaurants that have the chosen type
-        ArrayList<String> names=filterName(AllType);
-
-        // after it we get all the available restaurants in the visited list
-        List<VisitedRestaurants> AllVisited=this.findAll();
-
-        // In this end we filter the  visited restaurants that matches the chosen type
-        return AllVisited.stream().filter(visitedRestaurants -> names.contains(visitedRestaurants.getName())).collect(Collectors.toList());
-    }
-
     //this method is to check if a record already exist in the database
     @Override
     public Boolean CheckRecord(VisitedRestaurants visiRes) {
-        long count = visitedRepo.countByNameAndVisiteddate(visiRes.getName(),visiRes.getVisiteddate());
+        long count = visitedRepo.countByIdrestoAndAndVisiteddate(visiRes.getIdresto(),visiRes.getVisiteddate());
         return (count==0);
     }
 

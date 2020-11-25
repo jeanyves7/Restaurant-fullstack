@@ -11,5 +11,5 @@ import java.sql.Date;
 @Repository
 public interface VisitedRestosRepositery extends JpaRepository<VisitedRestaurants,Long> {
     //get the filtered data by type
-    Long countByNameAndVisiteddate(String name, Date visited);
+    Long countByIdrestoAndAndVisiteddate(Integer id, Date visited);
 }

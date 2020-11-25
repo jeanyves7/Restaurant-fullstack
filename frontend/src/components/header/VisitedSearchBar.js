@@ -10,11 +10,8 @@ import VisitedType from "./VisitedTypeInput";
 const useStyles = makeStyles((theme) => ({
   headers: {
     display:"flex",
-      justifyContent:"center",
       alignContent:"center",
-      [theme.breakpoints.down('sm')]:{
-        justifyContent:"flex-end",
-      },
+      justifyContent:"center",
       alignItems:"center",
       flexDirection:`row`,
       flex:1,
@@ -64,12 +61,19 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SearchAppBar() {
   const classes = useStyles();
-  
+  const theme=useTheme();
+  const isMobile=useMediaQuery(theme.breakpoints.down('xs'));
+
+  let justify;
+  if(isMobile){
+    justify="flex-end"
+  }
+
 return (
   <div className={classes.root}>
       <AppBar position="static" style={{background:"gray"}}> 
         <Toolbar>
-            <Box  className={classes.headers}>
+            <Box  className={classes.headers} style={{justifyContent:justify}} >
               <Box p={1} >
                  <VisitedType />
               </Box>

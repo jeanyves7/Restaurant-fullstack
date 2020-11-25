@@ -13,7 +13,8 @@ Create Table restaurants(
 
 Create TABLE IF NOT EXISTS visitedrestaurants(
     id SERIAL,
+    idresto INT,
     name VARCHAR(50),
     visiteddate date,
-    primary key (name,visiteddate)
+    primary key (idresto,visiteddate)
 );

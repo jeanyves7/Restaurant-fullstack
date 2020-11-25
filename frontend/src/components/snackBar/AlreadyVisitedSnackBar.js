@@ -2,7 +2,8 @@ import React from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
-
+import {setDuplicateError,setSuccessSave} from "../../actions/actions";
+import {useDispatch} from "react-redux";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -17,9 +18,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SnackBar({type,open,setClose}) {
+export default function SnackBar({type,open}) {
   const classes = useStyles();
   
+  const dispatch=useDispatch();
+
   // we want to handle the severity of the action
   let message;
   if(type==="error"){
@@ -32,7 +35,11 @@ export default function SnackBar({type,open,setClose}) {
     if (reason === 'clickaway') {
       return;
     }
-    setClose(false);
+    if(type==="error"){
+      dispatch(setDuplicateError(false));
+    }else{
+      dispatch(setSuccessSave(false));
+    }
   };
 
   return (

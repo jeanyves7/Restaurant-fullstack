@@ -25,7 +25,7 @@ function* LoadRestoFlow(action){
    }
    //once data has arrived we hide the loaders and put the corresponding data
     isloading=false;
-    
+    console.log(Resto);
     //Resto.content contains an array of the data
     yield put(setResto(Resto.content));
     

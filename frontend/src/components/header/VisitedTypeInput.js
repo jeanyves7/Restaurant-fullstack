@@ -5,7 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {useDispatch,useSelector} from "react-redux";
-import {setVisitedType} from "../../actions/actions"
+import {setVisitedType,loadVResto} from "../../actions/actions"
 
 const useStyles = makeStyles((theme) => ({
  
@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+//All types used in the Application for now if we want to update the app to add more types we can simply add it to this type field
 const Types=["All","Lebanese","American","Japanese","French","Italian","Mexican"]
 
 export default function TypeInput() {
@@ -38,9 +39,8 @@ export default function TypeInput() {
   //handle the change of input
   const handleChange = (event) => {
     const type=event.target.value;
-    //console.log(type);
-    //dispatching the data
     dispatch(setVisitedType(type));
+   
   };
 
  

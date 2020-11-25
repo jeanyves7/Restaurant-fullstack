@@ -40,12 +40,9 @@ export default function TypeInput() {
     const data=event.target.value
     // setting the search field to empty
     dispatch(setSearch(""));
-    //dispatching the data
     dispatch(setSize(data));
   };
 
-
- 
 
   return (
     <div>
@@ -60,8 +57,8 @@ export default function TypeInput() {
           value={size}
          onChange={handleChange}
         >
-          {
-              sizes.map(size => (
+          { 
+                sizes.map(size => (
                   <MenuItem key={size} value={size}>{size}</MenuItem>
               ))
           }

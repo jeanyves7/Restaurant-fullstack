@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
-import {loadResto,setSearch} from "../../actions/actions";
+import {loadResto,setPage,setSearch} from "../../actions/actions";
 import TypeInput from "./typeInput";
 import SizeInput from "./sizeInput";
 
@@ -80,30 +80,31 @@ export default function SearchAppBar() {
   const theme=useTheme();
   const isMobile=useMediaQuery(theme.breakpoints.down("xs"));
 
-  let margin;
-  if(!isMobile){
-    margin="15%"
-  }else{
-    margin="0%"
-  }
-
   //function to update the value of the search name
   const updateSearch = e =>{
     setCurrent(e.target.value)
+  }
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      getSearch(event);
+    }
   }
 
   // this is onClick event to get the correspondant data
   const getSearch = e =>{
       //prevent the defualt behaviorof the page
       e.preventDefault();
+      if(current!=''){
       const Name={name:current}
       //we dispatch the current search value so we don't loose it when we load the data
       dispatch(setSearch(current))
       //dispatching the name 
       dispatch(loadResto(Name));
+      }
   }
 
-  //function to display the search input
+  //function to display the search bar input
   const displaySearchInput = () =>{
     return ( 
     <Box  p={1}>
@@ -115,6 +116,7 @@ export default function SearchAppBar() {
               placeholder="Search…"
               value={current}
               onChange={updateSearch}
+              onKeyDown={handleKeyDown}
               classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput,
@@ -127,13 +129,13 @@ export default function SearchAppBar() {
 
 return (
   <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" style={{background:"#778899"}} >
         <Toolbar>
             <Box   className={classes.headers}>
               {!isMobile? (
                 displaySearchInput()
              )
-                // if we are in mobile forme we don't want to display anything in the searchBar 
+                // if we are in mobile forme we don't want to display the searchBar input 
                : <> </>}
               <Box  p={1}>
               <TypeInput />
@@ -144,7 +146,7 @@ return (
                       <Typography >SEARCH</Typography>
                   </Button>
               </Box>
-              <Box  p={1} style={{marginRight:margin}} >
+              <Box  p={1} >
               <SizeInput />
               </Box>
               
@@ -152,8 +154,8 @@ return (
       </Toolbar>
     </AppBar>
     {isMobile?
-        // if we are in mobile form we want to display the search input in a second AppBar
-         <AppBar position="static" style={{background:"#778899"}}>
+        // if we are in mobile forme we want to display the search input in a second AppBar
+         <AppBar position="static" >
             <Toolbar>
               <Box   className={classes.headers}>
                   {displaySearchInput()}

@@ -11,11 +11,11 @@ const useStyles = makeStyles((theme) => ({
  
   formControl: {
     minWidth: 100,
-    
     background:"white"
   },
 }));
 
+//All types used in the Application for now if we want to update the app to add more types we can simply add it to this type field
 const Types=["All","Lebanese","American","Japanese","French","Italian","Mexican"]
 
 export default function TypeInput() {

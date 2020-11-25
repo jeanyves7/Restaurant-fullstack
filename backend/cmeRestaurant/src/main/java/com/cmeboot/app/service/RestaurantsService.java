@@ -33,7 +33,7 @@ public class RestaurantsService implements IRestaurantsService {
     // it's a collection because we may have more than one restaurant that shares the same name but are in different location
     @Override
     public Page<Restaurants> findName(String name, Pageable pageable) {
-        return repository.findByNameIgnoreCase(name,pageable);
+        return repository.findByNameStartingWithIgnoreCase(name,pageable);
     }
 
     //method to return the restaurant by its id

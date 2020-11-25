@@ -26,6 +26,10 @@ export const SET_SEARCH="SET_SEARCH";             //14
 export const SET_SIZE="SET_SIZE";                 //15
 export const SET_VISITED_TYPE="SET_VISITED_TYPE";  //16
 
+//actions related to the success of adding a a visited restaurant to the backend
+export const SET_DUPLICATE_ERRPR="SET_DUPLICATE_ERROR" //17
+export const SET_SUCCESS_SAVE="SET_SUCCESS_SAVE"       //18
+
 //Visited section:
 //1
 export const addVResto = (Resto) =>({
@@ -130,3 +134,15 @@ export const setVisitedType=(data)=>({
     type:SET_VISITED_TYPE,
     payload:data,
 });
+
+//17
+export const setDuplicateError=(data)=>({
+    type:SET_DUPLICATE_ERRPR,
+    payload:data,
+});
+
+//18
+export const setSuccessSave=(data)=>({
+    type:SET_SUCCESS_SAVE,
+    payload:data,
+})

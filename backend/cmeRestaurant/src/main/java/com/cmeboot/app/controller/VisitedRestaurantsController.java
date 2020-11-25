@@ -35,7 +35,7 @@ public class VisitedRestaurantsController {
                 return new ResponseEntity<>(visoSer.addRestos(visoRe), HttpStatus.OK);
             }
             else{
-                System.out.println("already visited");
+                System.out.println(visoRe + "has been already visited for this date");
                 return new ResponseEntity<>(null,HttpStatus.OK);
             }
         }catch(Exception e){

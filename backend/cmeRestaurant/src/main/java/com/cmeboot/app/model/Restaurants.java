@@ -75,11 +75,11 @@ public class Restaurants {
         this.type = type;
     }
 
-    public String getCostLL() {
+    public String getCost() {
         return cost;
     }
 
-    public void setCostLL(String cost) {
+    public void setCost(String cost) {
         this.cost = cost;
     }
 

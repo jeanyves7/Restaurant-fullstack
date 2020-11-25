@@ -11,7 +11,7 @@ const columns = [
   { field: 'name',width: 180,
   
     },
-  { field: 'VisitedDate', type: 'date', width: 180,
+  { field: 'VisitedDate', type: 'date', width: 200,
   }
 ];
 
@@ -25,22 +25,21 @@ export default function VisitedRestaurants() {
   
   useEffect(()=>{
     getVisited();
-    console.log(5);
   },[VisitedType])
 
   const getVisited =() =>{
     const data={
       type:VisitedType
     }
-    console.log(5);
     dispatch(loadVResto(data));
   }
-
-  const UVRestos=VRestos.map(resto =>({
+  let UVRestos=[]
+  if(typeof(VRestos)==='object'){
+   UVRestos=VRestos.map(resto =>({
     id:resto.id,
     name:resto.name,
     VisitedDate:(moment(resto.visiteddate,'YYYY-MMDD').format('MMMM Do YYYY'))
-  } ))
+  } ))}
 
   //if we still loading the data we want to show loaders
  if(loading){

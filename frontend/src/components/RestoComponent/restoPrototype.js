@@ -43,12 +43,10 @@ const useStyles = makeStyles((muiBaseTheme) => ({
   }
 }));
 
-function RestauComponent({ name,photo }) {
+function RestauComponent({idresto, name,photo }) {
   const classes = useStyles();
  
-  const [openErrorSnackBar,setOpenErrorSnackBar]=useState(false);
-  const [openDoneSnackBar,setOpenDoneSnackBar]=useState(false);
-  const VRestos = useSelector(state => state.Visited.Visited);
+
   const VisitedType= useSelector(state => state.Type.VisitedType);
   const dispatch = useDispatch();
 
@@ -73,31 +71,18 @@ function RestauComponent({ name,photo }) {
     var today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     const data={
+      idresto:idresto,
       name:name,
       visiteddate:date
     }
-    // if the restaurant name and date alreadyExists in the table we don't want to dispatch the action
-    let alreadyVisited=false;
-    VRestos.map(resto=>{
-      if(resto.name===name && resto.visiteddate===date){
-        alreadyVisited=true;
-        setOpenErrorSnackBar(true);
-        return;
-      }
-    })
-    //if we haven't visited the restaurant we want to save it
-    if(!alreadyVisited){
+    console.log(data);
+    // if the restaurant name and date alreadyExists in the table we don't want to dispatch the actio
       dispatch(addVResto(data));
-      setOpenDoneSnackBar(true);
       setVisited(true);
-    }
+    
   }
   return (
     <>
-      <div>
-          <SnackBar  open ={openErrorSnackBar} setClose={setOpenErrorSnackBar}  type={"error"} />
-          <SnackBar  open ={openDoneSnackBar} setClose={setOpenDoneSnackBar} type={"success"} />
-      </div>
       <Paper className={classes.root}  style={{ backgroundImage: `url(${photo})`}} >
           <Typography
               className={classes.content}

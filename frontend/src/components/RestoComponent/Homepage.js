@@ -10,6 +10,7 @@ import RestoInfo from "./RestoInfo";
 import {loadResto,setPage} from "../../actions/actions";
 import Loader from "../loader/loaders";
 import SnackBar from "../snackBar/RestosnackBars";
+import AlreadyVsnackBar from "../snackBar/AlreadyVisitedSnackBar";
 
 const useStyles=makeStyles({
     appBar: {
@@ -73,6 +74,9 @@ const HomePage = () =>{
     const page= useSelector(state => state.Type.page);
     const size= useSelector(state => state.Type.size);
     
+    const openSaveSuccess = useSelector(state => state.Visited.onSuccess);
+    const openDuplicateError = useSelector(state => state.Visited.duplicateVError);
+
     const dispatch = useDispatch();
 
     //Dialog section:
@@ -124,6 +128,8 @@ const HomePage = () =>{
        <>
         <SnackBar />
         <SearchAppBar />
+        <AlreadyVsnackBar  open ={openDuplicateError}  type={"error"} />
+        <AlreadyVsnackBar  open ={openSaveSuccess}  type={"success"} />
         {!empty ?
           <> 
         <Box  spacing={5} className={classes.RestoContainer} >
@@ -131,10 +137,10 @@ const HomePage = () =>{
               //maping through the list of fetched Restos
               <Box   p={1} m={1} key={resto.id}>
                   <Link onClick={()=>handleClickOpen(resto.id)} to="" className={classes.linkText} >
-                         <Resto  key={resto.id} name={resto.name} photo={resto.img}  />
+                         <Resto  key={resto.id} idresto={resto.id} name={resto.name} photo={resto.img}  />
                   </Link>
                   <Dialog fullScreen open={open===resto.id} onClose={handleClose} TransitionComponent={Transition} key={resto.id} >
-                      <RestoInfo  key={resto.id}  name={resto.name} type={resto.type} cost={resto.costLL} addrss={resto.address} num={resto.phoneNumber} image={resto.img} close={handleClose}  />
+                      <RestoInfo  key={resto.id}  name={resto.name} type={resto.type} cost={resto.cost} addrss={resto.address} num={resto.phoneNumber} image={resto.img} close={handleClose}  />
                   </Dialog>
               </Box>
           ))}
@@ -146,7 +152,9 @@ const HomePage = () =>{
         </Box>
         </>
         :
+   
   <Box className={classes.content}>
+     {console.log(Restos)}
     <Typography variant="h5" > No content was found :'( </Typography>
   </Box>
   }

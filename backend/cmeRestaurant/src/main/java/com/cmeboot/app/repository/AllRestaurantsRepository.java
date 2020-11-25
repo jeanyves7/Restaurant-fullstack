@@ -15,9 +15,9 @@ import java.util.Optional;
 public interface AllRestaurantsRepository extends PagingAndSortingRepository<Restaurants,Long> {
     // methods that returns the paginated result based on the type of the request
     Page<Restaurants> findBytypeContaining(String type, Pageable pageable);
-    Page<Restaurants> findByNameIgnoreCase(String name,Pageable pageable);
+    Page<Restaurants> findByNameStartingWithIgnoreCase(String name,Pageable pageable);
 
-    // methods to filter the restaurants bu types
+    // methods to filter the restaurants by types it will help us select the visited restaurants by type
     List<Restaurants> findByType(String Type);
 
     //methods to get the restaurant by id

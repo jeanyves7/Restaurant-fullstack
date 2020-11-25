@@ -59,3 +59,6 @@ INSERT INTO restaurants(Name,type,avgCostf2,Address,phoneNumber,image) Values
  '05 954224','/Gallery/Shinto.jpg'),
 ('La Casa Di Pasta','Italian','75 000 L.L','Al Achkar Building, Talaat Joumblat, Facing CMC Hospital',
  '01 371 740','/Gallery/LaCasaPasta.jpg');
+
+
+

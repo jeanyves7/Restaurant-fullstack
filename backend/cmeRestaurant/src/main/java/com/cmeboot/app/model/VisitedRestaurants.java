@@ -20,20 +20,32 @@ public class VisitedRestaurants {
     @Column(name="Id")
     private Long id;
 
+
+    private Integer idresto;
+
     @Column(name="Name")
     private String name;
 
     @Column(name="visiteddate")
     private Date visiteddate;
 
-    public VisitedRestaurants(Long id, String name, java.sql.Date visiteddate) {
+    public VisitedRestaurants(Long id,Integer idresto ,String name, java.sql.Date visiteddate) {
         this.id = id;
+        this.idresto=idresto;
         this.name = name;
         this.visiteddate = visiteddate;
     }
 
     public VisitedRestaurants() {
 
+    }
+
+    public Integer getIdresto() {
+        return idresto;
+    }
+
+    public void setIdresto(Integer idresto) {
+        this.idresto = idresto;
     }
 
     public Long getId() {
@@ -48,6 +60,7 @@ public class VisitedRestaurants {
     public String toString() {
         return "VisitedRestaurants{" +
                 "id=" + id +
+                "idresto="+ idresto+
                 ", name='" + name + '\'' +
                 ", visiteddate=" + visiteddate +
                 '}';
