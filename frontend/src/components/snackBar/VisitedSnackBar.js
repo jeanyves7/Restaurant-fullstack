@@ -22,7 +22,7 @@ export default function SnackBar() {
   const classes = useStyles();
    //using the open state to display an error using snackBar
   const open= useSelector(state =>state.Visited.error);
-    
+  console.log(open)
   const dispatch = useDispatch();
 
   const handleClose = (event, reason) => {

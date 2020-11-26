@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 const Info = ({name,type,cost,addrss,num,image,close}) =>{
    
     // preparing the fields that will be displayed
-    const attributes=["Name: "+name,"Type: "+type,"Cost for two: "+cost,"Address: "+addrss,"Phone Number: "+num]
+    const attributes=["Name: "+name,"Type: "+type,"Cost for two: "+cost,"Address: "+addrss,"Call us: "+num]
     const classes = useStyles();
 
     // funstion to print a gap between the papers

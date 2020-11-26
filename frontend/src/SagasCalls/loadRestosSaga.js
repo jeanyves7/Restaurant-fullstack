@@ -13,7 +13,6 @@ function* LoadRestoFlow(action){
    // when a dispatch has been made we set the loaders to appear
    let isloading=true;
    yield put(loadingResto(isloading));
-
    try{
     // the statement is to check wether we are requesting types,sizes,another pages or we simply want to search to a name
     // if length = 1 => we are requesting a name 
@@ -25,7 +24,7 @@ function* LoadRestoFlow(action){
    }
    //once data has arrived we hide the loaders and put the corresponding data
     isloading=false;
-    console.log(Resto);
+
     //Resto.content contains an array of the data
     yield put(setResto(Resto.content));
     

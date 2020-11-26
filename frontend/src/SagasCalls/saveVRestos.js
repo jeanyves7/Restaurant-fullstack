@@ -8,7 +8,6 @@ export function* saveRestoWatcher(){
 }
 
 function* saveRestoFlow(action) {
-  console.log(action.payload);
   try{
   //making the api call
   const dat=action.payload;

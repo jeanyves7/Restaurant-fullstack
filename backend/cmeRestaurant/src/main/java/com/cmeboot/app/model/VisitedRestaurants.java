@@ -59,7 +59,6 @@ public class VisitedRestaurants {
     @Override
     public String toString() {
         return "VisitedRestaurants{" +
-                "id=" + id +
                 "idresto="+ idresto+
                 ", name='" + name + '\'' +
                 ", visiteddate=" + visiteddate +

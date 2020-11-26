@@ -95,7 +95,7 @@ export default function SearchAppBar() {
   const getSearch = e =>{
       //prevent the defualt behaviorof the page
       e.preventDefault();
-      if(current!=''){
+      if(current!==''){
       const Name={name:current}
       //we dispatch the current search value so we don't loose it when we load the data
       dispatch(setSearch(current))

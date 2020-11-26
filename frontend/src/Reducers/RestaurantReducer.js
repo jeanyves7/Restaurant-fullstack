@@ -11,7 +11,7 @@ const initial ={
 const RestaurantsReducer = (state=initial,action)=>{
     switch(action.type){
         case SET_RESTO:
-            return{...state,Restos:action.payload}
+            return{...state, Restos:action.payload}
         case SET_TOTAL_PAGES:
             return {...state,totalPages:action.payload}
         case LOADING_RESTO_DATA:

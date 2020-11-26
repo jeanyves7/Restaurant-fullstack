@@ -33,6 +33,8 @@ export default function VisitedRestaurants() {
     }
     dispatch(loadVResto(data));
   }
+  
+  
   let UVRestos=[]
   if(typeof(VRestos)==='object'){
    UVRestos=VRestos.map(resto =>({
@@ -50,7 +52,7 @@ export default function VisitedRestaurants() {
   return (
     <>
     <SnackBar />
-    <SearchBar/>
+    <SearchBar />
     <div style={{ height: 600, width: '100%' }}>
       <DataGrid  rows={UVRestos} columns={columns} />
     </div>
