@@ -1,10 +1,10 @@
 # Restaurant-fullstack
 This work is presented by jean yves Youssef
 
-##Frontend
+## Frontend
 In the frontend all the components related to the design are found in the Component folder
 
-###Component folder 
+### Component folder 
 In this folder the components are divided into categories:
 
 In the Header folder we will find the components related to the Navigation Bar and The general search Bar area
@@ -20,9 +20,9 @@ All the search result are paginated and the pagination is done dynamically
 
 The user can choose the size per page, he has options between 2,4,6,8 restaurants per page
 
-###For more info on the frontend please check the frontend readme file.
+### For more info on the frontend please check the frontend readme file.
 
-##BackEnd
+## BackEnd
 
 Backend is writen in java springBoot
 

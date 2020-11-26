@@ -1,4 +1,4 @@
-#Frontend
+# Frontend
 
 All the photos that are used in the application are found in the public/Gallery folder
 
@@ -8,12 +8,12 @@ All the actions that are used in the application are found in a single folder co
 
 The reason we have a huge number of actions is simple, we don't want to use the value of the state just before the rendering.
 
-##api calls
+## api calls
 
 All api calls are done using axios 
 In this applicaton we used two kind of calls, we have the get method and the post method.
 
-##Reducers 
+## Reducers 
 
 We have 3 categories of reducers:
 -RestaurantReducer contain the value of states that are related to the Restaurants components.
@@ -24,7 +24,7 @@ We have 3 categories of reducers:
 
 -CombineReducers is responsible to combine all the reducers so we will be able to use them in the store.
 
-##Saga Calls
+## Saga Calls
 
 we have 3 types of watchers:
 -LoadingRestoWatcher related to get the restaurants and store it.
